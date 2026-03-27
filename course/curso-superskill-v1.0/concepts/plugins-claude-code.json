@@ -1,0 +1,43 @@
+{
+  "id": "plugins-claude-code",
+  "orden": 13,
+  "titulo": "Plugins en Claude Code",
+  "tipo": "teoria-practica",
+  "zona": "Foro del Maestro",
+  "xp": 55,
+  "contenido": {
+    "explicacion": "Un plugin de Claude Code Desktop es un paquete distribuible que contiene una o mas skills. A diferencia de las skills locales (en ~/.claude/skills/), los plugins se instalan desde marketplaces (repositorios Git) y se invocan con prefijo: plugin-name:skill-name. La estructura minima es: .claude-plugin/plugin.json (metadata) + skills/{nombre}/SKILL.md. Opcionalmente puede incluir .mcp.json para bundlear servidores MCP (Model Context Protocol). Los plugins se distribuyen via marketplaces registrados en known_marketplaces.json o compartiendo directamente el repositorio Git.",
+    "explicacion_larga": "El ecosistema de plugins tiene 3 actores: creadores, marketplaces y usuarios. El creador empaqueta sus skills en un plugin con la estructura correcta (.claude-plugin/plugin.json + skills/). El marketplace es un repositorio Git que indexa plugins en un marketplace.json. Los usuarios registran marketplaces en known_marketplaces.json o en settings.json > extraKnownMarketplaces, y los plugins se clonan automaticamente en ~/.claude/plugins/marketplaces/{marketplace}/plugins/{plugin}/. El plugin.json tiene 3 campos obligatorios: name (kebab-case), description (para el catalogo del marketplace), y author (name + email). El .mcp.json es opcional y permite que el plugin configure servidores MCP automaticamente al instalarse — util para plugins que necesitan acceso a APIs externas. El blocklist.json permite a los usuarios bloquear plugins problematicos, y install-counts-cache.json trackea popularidad para ordenar resultados.",
+    "metafora": "Los plugins son como aplicaciones en una app store. Las skills locales son como apps que tu mismo compilas e instalas manualmente. Un plugin es una app empaquetada y publicada en una tienda (marketplace) para que cualquiera la pueda instalar con un click. El plugin.json es la ficha de la app store (nombre, descripcion, autor). El marketplace es la tienda misma. Y el known_marketplaces.json es tu lista de tiendas de confianza.",
+    "ejemplo_codigo": "# Crear un plugin distribuible paso a paso\n\n# 1. Estructura\nmkdir -p mi-plugin/.claude-plugin mi-plugin/skills/mi-skill\n\n# 2. plugin.json\ncat > mi-plugin/.claude-plugin/plugin.json << 'EOF'\n{\n  \"name\": \"mi-plugin\",\n  \"description\": \"Plugin para generar componentes React y tests\",\n  \"author\": {\n    \"name\": \"SalgadoIA\",\n    \"email\": \"contacto@salgadoia.com\"\n  }\n}\nEOF\n\n# 3. Skill dentro del plugin\ncat > mi-plugin/skills/mi-skill/SKILL.md << 'EOF'\n---\nname: mi-skill\ndescription: |\n  Genera componentes React.\n  USAR cuando: \"crear componente React\".\nauthor: SalgadoIA\nversion: 1.0.0\n---\n# Mi Skill\nGenera componentes React tipados.\nEOF\n\n# 4. Distribuir: subir a GitHub como repo\n# 5. Usuarios registran el marketplace:\n# settings.json > \"extraKnownMarketplaces\": {\n#   \"mi-marketplace\": {\"url\": \"https://github.com/user/repo\"}\n# }\n# 6. Invocar: mi-plugin:mi-skill"
+  },
+  "mini_reto": {
+    "titulo": "Crea un plugin completo",
+    "descripcion": "Crea la estructura completa de un plugin llamado 'dev-utils' que contenga 2 skills:\n1. Una micro-skill para generar .editorconfig\n2. Una micro-skill para generar .prettierrc\n\nEscribe:\n- .claude-plugin/plugin.json\n- skills/editorconfig-gen/SKILL.md\n- skills/prettierrc-gen/SKILL.md",
+    "criterios_exito": ["plugin.json con name, description, author completos", "2 SKILL.md validos con frontmatter", "Cada skill tiene triggers especificos", "Estructura de directorios correcta"],
+    "respuesta_esperada": "dev-utils/ con plugin.json (name: dev-utils, desc: utilidades de configuracion, author), skills/editorconfig-gen/SKILL.md (triggers: 'editorconfig', 'generar editorconfig'), skills/prettierrc-gen/SKILL.md (triggers: 'prettierrc', 'generar prettier config')",
+    "xp_bonus": 25
+  },
+  "glosario": [
+    {"termino": "Plugin", "definicion": "Paquete distribuible que contiene skills y se instala via marketplace. Estructura: .claude-plugin/ + skills/"},
+    {"termino": "Marketplace", "definicion": "Repositorio Git que indexa y distribuye plugins. Registrado en known_marketplaces.json"},
+    {"termino": "plugin.json", "definicion": "Archivo de metadata obligatorio en .claude-plugin/ con name, description y author"},
+    {"termino": "MCP", "definicion": "Model Context Protocol. Permite a plugins bundlear servidores que dan a Claude acceso a APIs externas"},
+    {"termino": "known_marketplaces.json", "definicion": "Registro de marketplaces de confianza en ~/.claude/plugins/"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Diagrama de ecosistema de plugins con 3 zonas. Zona Creador (izquierda): estructura del plugin con .claude-plugin/ y skills/. Zona Marketplace (centro): repo Git con marketplace.json e indice de plugins. Zona Usuario (derecha): ~/.claude/plugins/ con marketplaces clonados. Flechas: Creador→push→Marketplace→clone→Usuario. Debajo: ejemplo de invocacion 'mi-plugin:mi-skill'.",
+    "estilo": "diagrama de ecosistema, 3 zonas con colores distintos, flechas de flujo, fondo oscuro",
+    "plataforma": "1400x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["catalogar-y-organizar"],
+    "siguiente_recomendado": [],
+    "relacionados": ["crear-skill-desde-cero", "micro-skills"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "plugin_creado_en_reto",
+    "instincts_aplicables": ["reto-ejecutable-verificable", "ejemplo-codigo-real-nunca-pseudo"],
+    "confidence": 0.93
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "anatomia-skill-md",
+  "orden": 2,
+  "titulo": "Anatomia de SKILL.md",
+  "tipo": "teoria",
+  "zona": "Plaza del Aprendiz",
+  "xp": 30,
+  "contenido": {
+    "explicacion": "Un archivo SKILL.md tiene 3 partes fundamentales: el frontmatter YAML (metadata entre ---), el body Markdown (instrucciones principales), y los recursos bundled (archivos en subdirectorios). El frontmatter es obligatorio y contiene name, description, author y version. El body es el corazon: explica que hace la skill, cuando se activa, y como ejecutar cada tarea. Los recursos opcionales incluyen commands/ (comandos del usuario), agents/ (subagentes), references/ (documentacion extensa) y templates/ (plantillas generativas). Esta separacion en 3 partes permite progressive disclosure: Claude primero lee solo el frontmatter para decidir si activar la skill, luego carga el body si es relevante, y solo lee los recursos cuando los necesita.",
+    "explicacion_larga": "La estructura de SKILL.md esta disenada para optimizar el uso de contexto de Claude. El frontmatter YAML ocupa ~100 palabras y siempre esta cargado — es lo que permite la deteccion automatica. El body ocupa 200-500 lineas y se carga solo cuando la skill se activa. Los recursos (references, templates, scripts) se cargan bajo demanda cuando el body los referencia. Esta arquitectura de 3 niveles evita desperdiciar contexto en skills que no son relevantes para la conversacion actual. Un SKILL.md bien escrito sigue la forma imperativa ('Generar', 'Leer', 'Crear'), explica el por que ademas del que, usa tablas para opciones y diagramas ASCII para arquitectura. El limite recomendado es 500 lineas para el body; si necesitas mas, mueve contenido a references/.",
+    "metafora": "SKILL.md es como una receta de cocina profesional. El frontmatter es la etiqueta del plato (nombre, tipo de cocina, nivel de dificultad) — lo que ves en el menu. El body son los pasos de la receta que el chef sigue. Y los recursos son los anexos: la ficha tecnica del horno (references/), las plantillas de presentacion del plato (templates/), y las subtareas delegadas al sous-chef (agents/).",
+    "ejemplo_codigo": "# Estructura completa de un skill\n\n# ~/.claude/skills/mi-skill/\n# ├── SKILL.md              ← Frontmatter + Body\n# ├── commands/\n# │   └── mi-comando.md     ← Comando invocable: /mi-comando\n# ├── agents/\n# │   └── mi-agente.md      ← Subagente para tareas complejas\n# ├── references/\n# │   └── api-schema.md     ← Documentacion extensa\n# └── templates/\n#     └── component.md      ← Plantilla generativa\n\n# Ejemplo de SKILL.md minimo pero completo:\ncat << 'EOF'\n---\nname: component-gen\ndescription: |\n  Genera componentes React con TypeScript y Tailwind.\n  USAR cuando: \"crear componente\", \"generar componente\".\nauthor: SalgadoIA\nversion: 1.0.0\n---\n\n# Component Generator\n\n## Proposito\nGenera componentes React tipados.\n\n## Instrucciones\n1. Preguntar nombre y props\n2. Generar .tsx con template de `templates/component.md`\n3. Generar .test.tsx basico\nEOF"
+  },
+  "mini_reto": {
+    "titulo": "Mapea la estructura",
+    "descripcion": "Dado un directorio de skill con estos archivos, identifica que parte del skill es cada uno:\n- SKILL.md\n- commands/deploy.md\n- agents/analyzer.md\n- references/aws-regions.md\n- templates/lambda-function.md",
+    "criterios_exito": ["SKILL.md = frontmatter + body (instrucciones principales)", "commands/deploy.md = comando invocable por el usuario con /deploy", "agents/analyzer.md = subagente para analisis complejo", "references/aws-regions.md = documentacion de referencia cargada bajo demanda"],
+    "respuesta_esperada": "SKILL.md=core, deploy.md=command, analyzer.md=agent, aws-regions.md=reference, lambda-function.md=template",
+    "xp_bonus": 10
+  },
+  "glosario": [
+    {"termino": "Body", "definicion": "Contenido Markdown del SKILL.md despues del frontmatter, contiene las instrucciones principales"},
+    {"termino": "Progressive Disclosure", "definicion": "Patron de carga en 3 niveles: frontmatter siempre, body al activar, recursos bajo demanda"},
+    {"termino": "Recursos bundled", "definicion": "Archivos en subdirectorios del skill (commands/, agents/, references/, templates/) cargados bajo demanda"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Diagrama vertical de un archivo SKILL.md desglosado en 3 capas con colores distintos. Capa 1 (azul, arriba): Frontmatter YAML con name, description, author. Capa 2 (verde, centro): Body Markdown con proposito, instrucciones, reglas. Capa 3 (naranja, abajo): Recursos bundled con iconos de carpetas commands/, agents/, references/, templates/. Flecha lateral indicando 'Progressive Disclosure: se carga de arriba a abajo segun necesidad'.",
+    "estilo": "flat design, capas apiladas, fondo oscuro, bordes redondeados",
+    "plataforma": "1200x900px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["que-es-un-skill"],
+    "siguiente_recomendado": ["frontmatter-y-triggers"],
+    "relacionados": ["progressive-disclosure", "scripts-y-references"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["microleccion-6-secciones-obligatorias", "metafora-experiencia-cotidiana"],
+    "confidence": 0.95
+  }
+}

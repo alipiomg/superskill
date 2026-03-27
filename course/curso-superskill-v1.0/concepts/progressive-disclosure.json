@@ -1,0 +1,41 @@
+{
+  "id": "progressive-disclosure",
+  "orden": 4,
+  "titulo": "Progressive Disclosure",
+  "tipo": "teoria",
+  "zona": "Plaza del Aprendiz",
+  "xp": 30,
+  "contenido": {
+    "explicacion": "Progressive disclosure es el patron de carga en 3 niveles que usa Claude Code para gestionar el contexto eficientemente. Nivel 1: el frontmatter (~100 palabras) esta siempre cargado para todos los skills — asi Claude decide cual activar. Nivel 2: el body del SKILL.md (200-500 lineas) se carga solo cuando el skill se activa. Nivel 3: los recursos bundled (references/, agents/, templates/) se cargan bajo demanda cuando el body los referencia. Este patron existe porque el contexto de Claude es limitado. Si cargaramos todos los skills completos todo el tiempo, no quedaria espacio para la conversacion real del usuario.",
+    "explicacion_larga": "El limite de 500 lineas para el body no es arbitrario. Es el punto de equilibrio entre dar suficiente informacion a Claude y no desperdiciar contexto. Un body de 500 lineas permite instrucciones detalladas para 5-8 flujos de trabajo distintos. Si necesitas mas, la solucion no es un body mas largo — es mover el contenido a references/. Por ejemplo, si tu skill maneja una API con 50 endpoints, no listes los 50 en el body. Crea un references/api-endpoints.md y referencialo desde el body. Claude lo cargara solo cuando necesite consultar un endpoint especifico. Lo mismo aplica para templates largos, schemas JSON extensos, o documentacion de configuracion. La regla es: el body contiene la logica de decision y los flujos; references contiene los datos y la documentacion.",
+    "metafora": "Progressive disclosure funciona como una biblioteca. El catalogo (frontmatter) esta siempre visible para que encuentres el libro que buscas. El indice del libro (body) se abre solo cuando eliges ese libro. Y los capitulos individuales (references) se leen solo cuando necesitas ese contenido especifico. No tendria sentido leer todos los libros de la biblioteca cada vez que quieres consultar uno.",
+    "ejemplo_codigo": "# Ejemplo: Skill con progressive disclosure correcto\n\n# SKILL.md (body ~100 lineas, NO 500)\n# ---\n# name: api-gen\n# description: Genera APIs REST con Express\n# ---\n# ## Instrucciones\n# 1. Preguntar endpoints necesarios\n# 2. Consultar `references/express-patterns.md` para patrones\n# 3. Generar codigo usando `templates/route.md`\n# 4. Validar con `agents/api-tester.md`\n\n# references/express-patterns.md (300+ lineas de patrones)\n# templates/route.md (plantilla parametrizada)\n# agents/api-tester.md (logica de testing aislada)\n\n# ANTI-PATRON: Todo en SKILL.md (800 lineas)\n# Problema: desperdicia contexto, Claude tarda mas en procesar"
+  },
+  "mini_reto": {
+    "titulo": "Reorganiza el skill",
+    "descripcion": "Tienes un SKILL.md de 900 lineas que contiene:\n- 30 lineas de frontmatter\n- 100 lineas de instrucciones principales\n- 400 lineas de documentacion de API\n- 200 lineas de templates de codigo\n- 170 lineas de logica de testing\n\nReorganizalo en la estructura correcta de progressive disclosure.",
+    "criterios_exito": ["SKILL.md queda con ~130 lineas (frontmatter + instrucciones)", "API docs van a references/api-docs.md", "Templates van a templates/", "Logica de testing va a agents/tester.md"],
+    "respuesta_esperada": "SKILL.md (130 lineas), references/api-docs.md (400 lineas), templates/code.md (200 lineas), agents/tester.md (170 lineas)",
+    "xp_bonus": 10
+  },
+  "glosario": [
+    {"termino": "Contexto", "definicion": "Espacio de memoria de trabajo de Claude. Limitado, compartido entre skills, conversacion e instrucciones del sistema"},
+    {"termino": "Carga bajo demanda", "definicion": "Patron donde los archivos de references/ y templates/ se leen solo cuando el body del skill los necesita"},
+    {"termino": "Body", "definicion": "Contenido principal del SKILL.md despues del frontmatter. Limite recomendado: 500 lineas"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Piramide de 3 niveles representando progressive disclosure. Base (gris): Nivel 1 - Frontmatter, siempre cargado, ~100 palabras, icono de catalogo. Medio (azul): Nivel 2 - Body SKILL.md, al activar, 200-500 lineas, icono de libro abierto. Cima (dorado): Nivel 3 - Recursos, bajo demanda, sin limite, iconos de carpetas. Flecha lateral: 'Contexto usado' de poco (base) a mucho (cima).",
+    "estilo": "piramide isometrica, degradado gris-azul-dorado, fondo oscuro",
+    "plataforma": "1200x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["anatomia-skill-md"],
+    "siguiente_recomendado": ["agents-y-subagents"],
+    "relacionados": ["scripts-y-references"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["metafora-experiencia-cotidiana"],
+    "confidence": 0.92
+  }
+}

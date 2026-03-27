@@ -1,0 +1,42 @@
+{
+  "id": "que-es-un-skill",
+  "orden": 1,
+  "titulo": "Que es un Skill",
+  "tipo": "teoria",
+  "zona": "Plaza del Aprendiz",
+  "xp": 25,
+  "contenido": {
+    "explicacion": "Un skill de Claude Code es un archivo de instrucciones (SKILL.md) que ensena a Claude a realizar una tarea especializada. Piensa en Claude como un profesional muy capaz pero generalista. Un skill lo convierte en un especialista para un dominio concreto. A diferencia de un command (un simple script invocable con /nombre) o un agent (un subproceso autonomo para tareas complejas), un skill es un conjunto completo de conocimiento: sabe cuando activarse, que hacer, y como hacerlo bien. Los skills se almacenan en ~/.claude/skills/{nombre}/ y se cargan automaticamente cuando Claude detecta que el usuario necesita esa capacidad. Un skill puede contener commands propios, agents auxiliares, documentacion de referencia y plantillas.",
+    "explicacion_larga": "Claude Code funciona con un sistema de 3 capas de personalizacion. La primera capa son los commands: scripts simples que se invocan con /nombre y ejecutan una secuencia fija de pasos. La segunda capa son los agents: subprocesos que Claude puede lanzar para tareas que requieren contexto aislado o procesamiento largo. La tercera capa, y la mas poderosa, son los skills. Un skill combina todo: tiene un SKILL.md principal con instrucciones detalladas, puede tener sus propios commands para interaccion con el usuario, agents para tareas complejas, references para documentacion extensa, y templates para generacion de contenido. Lo que hace especial a un skill es su frontmatter YAML: un bloque de metadata al inicio del archivo que le dice a Claude cuando activarse automaticamente basandose en lo que dice el usuario. Esto significa que el usuario no necesita recordar nombres de comandos — simplemente describe lo que necesita y el skill correcto se activa.",
+    "metafora": "Imagina que Claude es un taller mecanico. Los commands son las herramientas basicas (llave inglesa, destornillador). Los agents son los mecanicos especializados que puedes llamar. Pero un skill es un manual completo de reparacion para un modelo de coche especifico: incluye las herramientas necesarias, los procedimientos paso a paso, los diagramas de referencia, y sabe exactamente cuando aplicarse al detectar que ese modelo esta en el taller.",
+    "ejemplo_codigo": "# Ejemplo: Estructura basica de un skill\n\n# ~/.claude/skills/mi-skill/\n# └── SKILL.md\n\n# Contenido de SKILL.md:\n# ---\n# name: mi-skill\n# description: |\n#   Genera componentes React con TypeScript.\n#   USAR cuando el usuario diga \"crear componente\", \"generar componente React\".\n# author: SalgadoIA\n# version: 1.0.0\n# ---\n# \n# # Mi Skill\n# ## Proposito\n# Genera componentes React tipados con Tailwind CSS.\n# ## Instrucciones\n# 1. Preguntar nombre del componente\n# 2. Generar archivo .tsx con props tipadas\n# 3. Generar archivo .test.tsx basico"
+  },
+  "mini_reto": {
+    "titulo": "Identifica los 3 niveles",
+    "descripcion": "Dado el siguiente escenario, clasifica cada elemento como command, agent o skill:\n1. Un script que ejecuta 'npm test' cuando escribes /test\n2. Un archivo SKILL.md con frontmatter que se activa cuando dices 'generar API REST'\n3. Un subproceso que Claude lanza para analizar 500 archivos en paralelo",
+    "criterios_exito": ["Identificar /test como command", "Identificar el SKILL.md con frontmatter como skill", "Identificar el subproceso paralelo como agent"],
+    "respuesta_esperada": "1=command, 2=skill, 3=agent",
+    "xp_bonus": 10
+  },
+  "glosario": [
+    {"termino": "Skill", "definicion": "Archivo SKILL.md con instrucciones especializadas que Claude Code carga para realizar tareas de un dominio especifico"},
+    {"termino": "Command", "definicion": "Script invocable con /nombre que ejecuta una secuencia fija de pasos"},
+    {"termino": "Agent", "definicion": "Subproceso autonomo que Claude lanza para tareas que requieren contexto aislado"},
+    {"termino": "Frontmatter", "definicion": "Bloque YAML al inicio de SKILL.md delimitado por --- que contiene metadata como name, description y triggers"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Diagrama de 3 columnas comparando Command vs Agent vs Skill. Columna izquierda: Command (icono de terminal, simple, /nombre). Centro: Agent (icono de robot, autonomo, subproceso). Derecha: Skill (icono de libro abierto con engranajes, completo, auto-activacion). Flechas mostrando que un Skill puede contener Commands y Agents.",
+    "estilo": "flat design, colores azul-naranja-verde, fondo oscuro, tipografia moderna",
+    "plataforma": "1200x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": [],
+    "siguiente_recomendado": ["anatomia-skill-md"],
+    "relacionados": ["micro-skills", "crear-skill-desde-cero"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["metafora-experiencia-cotidiana", "ejemplo-codigo-real-nunca-pseudo"],
+    "confidence": 0.95
+  }
+}

@@ -1,0 +1,35 @@
+# Observables para Sinapsis — Curso La Forja de Skills
+# Estos eventos alimentan el pipeline de mejora continua del curso
+
+observables:
+  - evento: leccion_completada
+    campos: [nodo_id, tiempo_segundos, ruta_elegida, timestamp]
+    trigger_sinapsis: "Si tiempo > 600s en teoria, simplificar explicacion"
+
+  - evento: reto_intentado
+    campos: [nodo_id, exitoso, intentos, timestamp]
+    trigger_sinapsis: "Si exitoso=false en >60% estudiantes, anadir pistas"
+
+  - evento: reto_fallido
+    campos: [nodo_id, error_tipo, timestamp]
+    trigger_sinapsis: "Agrupar errores por tipo para generar gotchas"
+
+  - evento: concepto_omitido
+    campos: [nodo_id, ruta_elegida, timestamp]
+    trigger_sinapsis: "Si >70% omiten un nodo, revisar si es relevante"
+
+  - evento: ruta_elegida
+    campos: [ruta_id, timestamp]
+    trigger_sinapsis: "Detectar ruta mas popular para optimizarla"
+
+  - evento: glosario_consultado
+    campos: [nodo_id, termino, veces, timestamp]
+    trigger_sinapsis: "Si un termino se consulta >20 veces, explicar mejor en contexto"
+
+  - evento: skill_creada_en_reto
+    campos: [nodo_id, skill_tipo, quality_score, timestamp]
+    trigger_sinapsis: "Analizar quality_score promedio para ajustar dificultad de retos"
+
+  - evento: plugin_creado_en_reto
+    campos: [nodo_id, num_skills, tiene_mcp, timestamp]
+    trigger_sinapsis: "Si pocos incluyen MCP, reforzar esa seccion"

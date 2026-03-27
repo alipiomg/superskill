@@ -1,0 +1,42 @@
+{
+  "id": "mejora-iterativa",
+  "orden": 10,
+  "titulo": "Mejora Iterativa",
+  "tipo": "practica",
+  "zona": "Laboratorio de Creacion",
+  "xp": 45,
+  "contenido": {
+    "explicacion": "La mejora iterativa es el proceso de tomar un skill existente, analizarlo contra la rubrica de calidad, identificar debilidades, y aplicar mejoras medibles. El comando /skill-improve automatiza este proceso: lee el SKILL.md, evalua las 4 dimensiones (frontmatter 0-25, contenido 0-25, estructura 0-25, reutilizacion 0-25), consulta instincts de sinapsis relevantes, y propone mejoras con impacto estimado. El usuario selecciona cuales aplicar y el historial se guarda para tracking. La description optimization es un caso especial: genera 20 queries de eval (10 should-trigger, 10 should-not), mide la precision actual, y optimiza iterativamente.",
+    "explicacion_larga": "El ciclo de mejora tiene 3 niveles. Nivel 1 — Mejora manual: tu mismo revisas el SKILL.md con la rubrica y aplicas cambios. Nivel 2 — Mejora asistida: /skill-improve analiza y propone, tu decides. Nivel 3 — Mejora automatica: el skill-creator plugin ejecuta un loop de optimizacion de description con extended thinking, midiendo precision en cada iteracion. La comparacion ciega (blind comparison) es una tecnica avanzada: el agente comparator ejecuta la misma tarea con la version antigua y la nueva del skill, sin saber cual es cual, y decide cual produce mejor output. Esto elimina el sesgo de confirmacion. El historial de mejoras (improvements/{nombre}/history.json) permite ver la evolucion del quality_score a lo largo del tiempo y revertir si una mejora empeoro algo.",
+    "metafora": "La mejora iterativa es como afinar un instrumento musical. No lo afinas una vez y listo — lo afinas, tocas una nota, escuchas si suena bien, ajustas un poco mas, tocas otra nota. La rubrica es tu oido entrenado que detecta desafinaciones. Los instincts de sinapsis son la experiencia acumulada de miles de afinaciones previas. Y la comparacion ciega es como pedirle a alguien que escuche dos interpretaciones sin saber cual es cual y diga cual suena mejor.",
+    "ejemplo_codigo": "# Ejemplo de mejora iterativa\n\n# Score ANTES: 62/100\n# - Frontmatter: 12/25 (triggers vagos)\n# - Contenido: 18/25 (ok)\n# - Estructura: 20/25 (buena)\n# - Reutilizacion: 12/25 (no referencia skill-creator)\n\n# Mejora 1: Triggers especificos (+8 pts)\n# ANTES:\n# description: Genera APIs con Express\n# DESPUES:\n# description: |\n#   Genera APIs REST con Express y TypeScript.\n#   USAR cuando: \"generar API REST\", \"crear API Express\",\n#   \"API con TypeScript\", \"Express endpoints\".\n#   NO usar para: GraphQL, Hono, FastAPI.\n\n# Mejora 2: Delegacion a skill-creator (+8 pts)\n# Anadir en SKILL.md:\n# ## Testing\n# Delegar eval/benchmark al skill-creator plugin.\n\n# Score DESPUES: 78/100 (+16 pts)\n\n# history.json:\n# {\"iterations\": [{\"date\": \"2026-03-26\",\n#   \"score_before\": 62, \"score_after\": 78,\n#   \"improvements\": [\"triggers-especificos\", \"delegacion-skill-creator\"]}]}"
+  },
+  "mini_reto": {
+    "titulo": "Mejora este skill",
+    "descripcion": "Analiza este frontmatter y propone 3 mejoras concretas:\n\n```yaml\n---\nname: DocGen\ndescription: genera documentacion\nversion: 1.0\n---\n```\n\nPara cada mejora indica: que cambias, por que, e impacto estimado en puntos.",
+    "criterios_exito": ["Detectar name no kebab-case → doc-gen", "Detectar description vaga → anadir triggers especificos", "Detectar falta de author → anadirlo", "Estimar impacto en puntos para cada mejora"],
+    "respuesta_esperada": "1: name DocGen→doc-gen (+2pts), 2: description con 3+ triggers (+10pts), 3: anadir author (+3pts). Extra: version 1.0→1.0.0",
+    "xp_bonus": 15
+  },
+  "glosario": [
+    {"termino": "Rubrica de calidad", "definicion": "Sistema de puntuacion 0-100 en 4 dimensiones para evaluar skills de forma estandarizada"},
+    {"termino": "Description optimization", "definicion": "Proceso iterativo para mejorar la precision de los triggers del frontmatter usando queries de eval"},
+    {"termino": "Comparacion ciega", "definicion": "Tecnica donde un evaluador compara dos versiones de un skill sin saber cual es la nueva y cual la antigua"},
+    {"termino": "History.json", "definicion": "Archivo que registra cada iteracion de mejora con score antes/despues y mejoras aplicadas"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Ciclo de mejora continua en forma de espiral ascendente. En la base: 'v1.0 Score: 62'. Primer giro: 'Analisis con rubrica' → 'Propuesta de mejoras' → 'Aplicacion'. Segundo nivel: 'v1.1 Score: 78'. Segundo giro: 'Testing con evals' → 'Description optimization' → 'Comparacion ciega'. Tercer nivel: 'v2.0 Score: 91'. En el centro de la espiral: icono de sinapsis alimentando instincts.",
+    "estilo": "espiral ascendente 3D, numeros de score grandes, colores progresivos rojo→amarillo→verde",
+    "plataforma": "1200x900px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["testing-y-evaluacion"],
+    "siguiente_recomendado": ["fusion-de-skills"],
+    "relacionados": ["crear-skill-desde-cero"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["reto-ejecutable-verificable"],
+    "confidence": 0.91
+  }
+}

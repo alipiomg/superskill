@@ -1,0 +1,41 @@
+{
+  "id": "micro-skills",
+  "orden": 7,
+  "titulo": "Micro-Skills",
+  "tipo": "practica",
+  "zona": "Taller de Forja",
+  "xp": 40,
+  "contenido": {
+    "explicacion": "Un micro-skill es la version ultraligera de un skill: un solo archivo SKILL.md de maximo 100 lineas, sin subdirectorios, con un unico proposito. Es perfecto para tareas atomicas y repetitivas: generar un .gitignore, formatear JSON, crear un commit message, explicar una regex. La regla de oro es: si puedes describir completamente lo que hace en 100 lineas o menos, es un micro-skill. Si necesitas agents, commands o references, promuevelo a skill completa.",
+    "explicacion_larga": "Los micro-skills son la pieza mas agil del ecosistema. Se crean en minutos, ocupan minimo contexto, y resuelven una necesidad concreta. El patron ideal es: frontmatter con trigger especifico (15-20 lineas), proposito en 1 linea, instrucciones en 3-5 pasos, output esperado, y un ejemplo. Total: 50-80 lineas. Los micro-skills son ideales para construir un catalogo personal de utilidades. Cada desarrollador tiene tareas repetitivas que automatiza de formas diferentes. Un micro-skill captura tu forma preferida de hacer esa tarea. Anti-patrones a evitar: micro-skill que crece (>100 lineas, promover), micro-skill con agentes (no es micro), micro-skill ambiguo (trigger vago = falsos positivos), micro-skill duplicado (verificar catalogo primero).",
+    "metafora": "Si un skill completo es un cuchillo suizo con 15 herramientas, un micro-skill es un destornillador de precision: hace una sola cosa, la hace perfectamente, y cabe en el bolsillo. No intentas meter un taladro en el bolsillo, ni usas un cuchillo suizo cuando solo necesitas un destornillador.",
+    "ejemplo_codigo": "# Ejemplo real: Micro-skill generador de .gitignore\n# ~/.claude/skills/gitignore-gen/SKILL.md\n# Total: 45 lineas\n\ncat << 'SKILL'\n---\nname: gitignore-gen\ndescription: |\n  Genera un archivo .gitignore apropiado al stack del proyecto.\n  USAR cuando: \"generar gitignore\", \"crear .gitignore\", \"gitignore para\".\n  NO usar cuando el usuario quiera editar un .gitignore existente.\nauthor: SalgadoIA\nversion: 1.0.0\n---\n\n# Gitignore Generator\n\n## Proposito\nGenera .gitignore optimizado segun el stack detectado.\n\n## Instrucciones\n1. Detectar stack: buscar package.json (Node), requirements.txt (Python),\n   Cargo.toml (Rust), go.mod (Go), pom.xml (Java)\n2. Generar .gitignore con reglas para:\n   - Dependencias (node_modules/, venv/, target/)\n   - Build (dist/, build/, .next/)\n   - IDE (.vscode/, .idea/)\n   - OS (.DS_Store, Thumbs.db)\n   - Env (.env, .env.local)\n3. Escribir archivo .gitignore en la raiz del proyecto\n\n## Output\nArchivo .gitignore creado con mensaje de confirmacion.\nSKILL"
+  },
+  "mini_reto": {
+    "titulo": "Crea tu primer micro-skill",
+    "descripcion": "Crea un micro-skill completo que convierta texto pegado por el usuario en una tabla Markdown. Debe:\n1. Tener frontmatter con nombre, description con 3 triggers, author y version\n2. Instrucciones claras en 3-5 pasos\n3. Un ejemplo de input/output\n4. Maximo 80 lineas\n\nEscribe el SKILL.md completo.",
+    "criterios_exito": ["Frontmatter completo con 3+ triggers", "Instrucciones en 3-5 pasos", "Ejemplo de input y output incluido", "Total <= 80 lineas"],
+    "respuesta_esperada": "SKILL.md con name: markdown-table-gen, triggers: 'crear tabla', 'convertir a tabla markdown', 'tabla markdown', instrucciones para parsear input, detectar separador, generar tabla md",
+    "xp_bonus": 20
+  },
+  "glosario": [
+    {"termino": "Micro-skill", "definicion": "Skill ultraligero de maximo 100 lineas, un solo archivo SKILL.md, un unico proposito, sin subdirectorios"},
+    {"termino": "Tarea atomica", "definicion": "Tarea indivisible que no puede ni necesita descomponerse en subtareas"},
+    {"termino": "Promover", "definicion": "Convertir un micro-skill en skill completa cuando supera las 100 lineas o necesita subdirectorios"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Comparacion visual de micro-skill vs skill completa. Izquierda: caja pequena y compacta 'Micro-Skill' con un solo archivo SKILL.md, flecha '<=100 lineas', iconos de destornillador (una herramienta). Derecha: caja grande 'Skill Completa' con arbol de carpetas, flecha '100-500 lineas', icono de cuchillo suizo. Linea punteada entre ambos con etiqueta 'Promover cuando crece'.",
+    "estilo": "comparacion side-by-side, tamanos proporcionales, fondo oscuro",
+    "plataforma": "1200x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["que-es-un-skill"],
+    "siguiente_recomendado": ["crear-skill-desde-cero"],
+    "relacionados": ["anatomia-skill-md"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["reto-ejecutable-verificable", "ejemplo-codigo-real-nunca-pseudo"],
+    "confidence": 0.94
+  }
+}

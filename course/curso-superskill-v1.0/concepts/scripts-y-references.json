@@ -1,0 +1,41 @@
+{
+  "id": "scripts-y-references",
+  "orden": 6,
+  "titulo": "Scripts y References",
+  "tipo": "practica",
+  "zona": "Taller de Forja",
+  "xp": 35,
+  "contenido": {
+    "explicacion": "Los directorios scripts/ y references/ complementan a agents/ y commands/ en la estructura de un skill. references/ contiene documentacion extensa que el skill consulta bajo demanda: schemas de API, patrones de codigo, guias de configuracion, taxonomias. scripts/ contiene codigo ejecutable deterministico: validadores, formateadores, generadores de reportes. La diferencia clave es que references/ es informacion pasiva (Claude la lee) y scripts/ es codigo activo (Claude lo ejecuta via Bash). Usa templates/ para plantillas parametrizadas que generan archivos de salida.",
+    "explicacion_larga": "Reglas para decidir donde va cada cosa: Si es documentacion que Claude necesita consultar pero no ejecutar → references/. Si es codigo Python/JS/Bash que produce un resultado deterministico → scripts/. Si es un archivo con placeholders {{VARIABLE}} que genera output → templates/. Si es logica de decision compleja que necesita contexto aislado → agents/. Un error comun es poner documentacion en agents/ o logica en references/. Los scripts son especialmente utiles para tareas que un LLM no deberia hacer de forma probabilistica: validar JSON, calcular checksums, agregar datos numericos, formatear archivos. El principio es: si el resultado debe ser exacto y repetible, usa un script; si requiere juicio y creatividad, usa un agent o instrucciones inline.",
+    "metafora": "Piensa en una oficina. references/ es el archivador con toda la documentacion consultable (manuales, normativas, guias). scripts/ es la calculadora y las herramientas automaticas (generan resultados exactos cada vez). templates/ son los formularios pre-impresos que solo necesitas rellenar. agents/ son los colegas especialistas a quienes delegas trabajo complejo. Y el SKILL.md es tu mesa de trabajo donde coordinas todo.",
+    "ejemplo_codigo": "# references/express-patterns.md\n# Documentacion de patrones Express.js\n# Claude la lee cuando necesita generar rutas\n#\n# ## Patron: CRUD basico\n# router.get('/:id', async (req, res) => { ... })\n# router.post('/', async (req, res) => { ... })\n# ...\n\n# scripts/validate_skill.py\n# Script deterministico que valida estructura\nimport json, sys, yaml\n\ndef validate_frontmatter(content):\n    parts = content.split('---')\n    if len(parts) < 3:\n        return False, 'Missing frontmatter delimiters'\n    try:\n        meta = yaml.safe_load(parts[1])\n        required = ['name', 'description', 'author', 'version']\n        missing = [f for f in required if f not in meta]\n        if missing:\n            return False, f'Missing fields: {missing}'\n        return True, 'Valid'\n    except yaml.YAMLError as e:\n        return False, f'YAML error: {e}'\n\n# templates/component.md\n# Plantilla con placeholders\n# import React from 'react'\n# interface {{COMPONENT_NAME}}Props {\n#   {{PROPS}}\n# }\n# export const {{COMPONENT_NAME}}: React.FC<{{COMPONENT_NAME}}Props> = (props) => {\n#   return <div>{{CONTENT}}</div>\n# }"
+  },
+  "mini_reto": {
+    "titulo": "Clasifica los archivos",
+    "descripcion": "Tienes estos 6 archivos para un skill de generacion de APIs. Clasifica cada uno en el directorio correcto (references/, scripts/, templates/, agents/):\n1. Un documento de 200 lineas con los codigos HTTP y sus significados\n2. Un script Python que valida que un archivo OpenAPI es correcto\n3. Una plantilla de ruta Express con {{METHOD}}, {{PATH}}, {{HANDLER}}\n4. Un proceso que analiza el codigo existente para detectar endpoints duplicados\n5. Un script Bash que cuenta lineas de codigo por archivo\n6. Una guia de mejores practicas para disenar APIs RESTful",
+    "criterios_exito": ["HTTP codes doc → references/", "Validador OpenAPI → scripts/", "Plantilla Express → templates/", "Detector duplicados → agents/"],
+    "respuesta_esperada": "1=references, 2=scripts, 3=templates, 4=agents, 5=scripts, 6=references",
+    "xp_bonus": 10
+  },
+  "glosario": [
+    {"termino": "Deterministico", "definicion": "Que produce el mismo resultado exacto cada vez que se ejecuta con el mismo input. Scripts vs agentes (probabilisticos)"},
+    {"termino": "Placeholder", "definicion": "Variable en una plantilla ({{NOMBRE}}) que se reemplaza con un valor concreto al generar el archivo"},
+    {"termino": "Carga bajo demanda", "definicion": "Referencias y scripts que solo se leen/ejecutan cuando el body del SKILL.md los necesita"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Grid 2x2 mostrando los 4 tipos de recursos. Top-left (azul): references/ con icono de libro - 'Documentacion pasiva, Claude lee'. Top-right (verde): scripts/ con icono de engranaje - 'Codigo activo, resultado exacto'. Bottom-left (naranja): templates/ con icono de formulario - 'Plantillas con {{placeholders}}'. Bottom-right (morado): agents/ con icono de robot - 'Subprocesos autonomos'. Centro: SKILL.md coordinando todo.",
+    "estilo": "grid 2x2, iconos grandes, colores por tipo, fondo oscuro",
+    "plataforma": "1200x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["anatomia-skill-md"],
+    "siguiente_recomendado": ["micro-skills"],
+    "relacionados": ["progressive-disclosure", "agents-y-subagents"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["ejemplo-codigo-real-nunca-pseudo", "metafora-experiencia-cotidiana"],
+    "confidence": 0.90
+  }
+}

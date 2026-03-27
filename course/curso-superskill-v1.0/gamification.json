@@ -1,0 +1,29 @@
+{
+  "tema": "La Forja de Skills",
+  "narrativa": "Eres un aprendiz en la Gran Forja de Skills. Cada leccion es una pieza que forjas, cada reto es una prueba de fuego. Asciende desde Aprendiz de Herrero hasta Gran Maestro de la Forja.",
+  "xp_config": {
+    "leccion_teoria": 25,
+    "leccion_practica": 40,
+    "reto_completado": 20,
+    "primer_intento_exitoso": 10,
+    "leccion_teoria_practica": 55
+  },
+  "niveles": [
+    {"id": 1, "nombre": "Aprendiz de Herrero", "xp_minimo": 0, "xp_maximo": 100, "descripcion": "Acabas de llegar a la forja. Todo es nuevo."},
+    {"id": 2, "nombre": "Herrero de Micro-Skills", "xp_minimo": 101, "xp_maximo": 250, "descripcion": "Ya sabes forjar piezas pequenas y utiles."},
+    {"id": 3, "nombre": "Forjador de Skills", "xp_minimo": 251, "xp_maximo": 450, "descripcion": "Creas skills completas con estructura profesional."},
+    {"id": 4, "nombre": "Maestro Fundidor", "xp_minimo": 451, "xp_maximo": 650, "descripcion": "Dominas la fusion y la mejora iterativa."},
+    {"id": 5, "nombre": "Arquitecto de Plugins", "xp_minimo": 651, "xp_maximo": 850, "descripcion": "Disenas plugins distribuibles para la comunidad."},
+    {"id": 6, "nombre": "Gran Maestro de la Forja", "xp_minimo": 851, "xp_maximo": 999, "descripcion": "Has dominado todo el ecosistema. Eres leyenda."}
+  ],
+  "badges": [
+    {"id": "primera-chispa", "nombre": "Primera Chispa", "descripcion": "Completa tu primera leccion", "condicion": "Completar nodo que-es-un-skill", "icono": "fire"},
+    {"id": "primer-skill", "nombre": "Primer Skill", "descripcion": "Crea tu primer micro-skill en el reto", "condicion": "Completar reto de micro-skills", "icono": "hammer"},
+    {"id": "anatomista", "nombre": "Anatomista", "descripcion": "Completa todas las lecciones de anatomia (nodos 2-6)", "condicion": "Completar nodos 2, 3, 4, 5, 6", "icono": "microscope"},
+    {"id": "fundidor", "nombre": "Fundidor", "descripcion": "Completa el reto de fusion de skills", "condicion": "Completar nodo fusion-de-skills", "icono": "merge"},
+    {"id": "catalogador", "nombre": "Catalogador", "descripcion": "Completa la leccion de catalogacion", "condicion": "Completar nodo catalogar-y-organizar", "icono": "folder"},
+    {"id": "plugin-master", "nombre": "Plugin Master", "descripcion": "Completa la leccion de plugins", "condicion": "Completar nodo plugins-claude-code", "icono": "plug"},
+    {"id": "ciclo-completo", "nombre": "Ciclo Completo", "descripcion": "Completa las 13 lecciones", "condicion": "Completar todos los nodos", "icono": "trophy"},
+    {"id": "forjador-perfecto", "nombre": "Forjador Perfecto", "descripcion": "Completa todos los retos al primer intento", "condicion": "Todos los retos con primer_intento_exitoso", "icono": "star"}
+  ]
+}

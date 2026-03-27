@@ -1,0 +1,42 @@
+{
+  "id": "frontmatter-y-triggers",
+  "orden": 3,
+  "titulo": "Frontmatter y Triggers",
+  "tipo": "practica",
+  "zona": "Taller de Forja",
+  "xp": 40,
+  "contenido": {
+    "explicacion": "El frontmatter YAML es la pieza mas critica de un skill porque determina cuando se activa. El campo description no es solo documentacion — es el mecanismo de trigger. Claude lee las descriptions de todos los skills cargados y decide cual activar basandose en lo que dice el usuario. Por eso, la description debe incluir frases literales que el usuario diria, en el idioma que usa, y tambien exclusiones ('NO usar cuando...') para evitar falsos positivos. Los campos obligatorios son: name (kebab-case), description (multi-linea con triggers), author y version.",
+    "explicacion_larga": "Escribir buenos triggers es un arte. Un trigger demasiado vago ('cuando el usuario quiera hacer algo con codigo') se activara constantemente y molestara. Un trigger demasiado especifico ('cuando el usuario diga exactamente crear-componente-react-typescript-tailwind') nunca se activara. El equilibrio esta en incluir 3-5 frases literales que cubran las variantes naturales de como el usuario pediria esa tarea. Incluye variantes en espanol e ingles si tu audiencia es bilingue. Usa 'USAR cuando' para listar triggers positivos y 'NO usar cuando' para exclusiones. El campo auto_activate (boolean) determina si el skill puede activarse solo al detectar contexto, o si requiere invocacion explicita. El campo user_invocable (boolean) determina si el usuario puede llamarlo directamente.",
+    "metafora": "El frontmatter es como el cartel de una tienda. Si pone 'Panaderia' la gente entra a comprar pan. Si pone 'Establecimiento comercial de productos alimenticios derivados de cereales' nadie entiende que venden pan. Y si pone 'Todo' la gente entrara buscando cosas que no vendes. Tus triggers deben ser como un buen cartel: claros, especificos, y en el idioma de tus clientes.",
+    "ejemplo_codigo": "# MALO: trigger vago\n# ---\n# name: mi-skill\n# description: Ayuda con codigo\n# ---\n# Problema: se activa con CUALQUIER pregunta sobre codigo\n\n# BUENO: triggers especificos con exclusiones\n# ---\n# name: react-component-gen\n# description: |\n#   Genera componentes React con TypeScript y Tailwind CSS.\n#   USAR cuando el usuario diga:\n#   - \"crear componente React\"\n#   - \"generar componente\"\n#   - \"nuevo componente tsx\"\n#   - \"component generator\"\n#   NO usar cuando:\n#   - El usuario pida componentes Vue o Angular\n#   - El usuario solo quiera editar un componente existente\n# author: SalgadoIA\n# version: 1.0.0\n# auto_activate: true\n# user_invocable: true\n# ---"
+  },
+  "mini_reto": {
+    "titulo": "Escribe un frontmatter profesional",
+    "descripcion": "Escribe el frontmatter completo para un skill que genera tests unitarios con Jest para funciones JavaScript. Debe incluir:\n1. name en kebab-case\n2. description con al menos 3 triggers literales\n3. Al menos 2 exclusiones (NO usar cuando...)\n4. author y version\n5. auto_activate y user_invocable",
+    "criterios_exito": ["name en kebab-case (ej: jest-test-gen)", "3+ triggers literales en description", "2+ exclusiones con NO usar", "Campos author y version presentes"],
+    "respuesta_esperada": "name: jest-test-gen, description con triggers como 'generar test', 'crear test unitario', 'test con Jest', exclusiones como 'NO usar para tests e2e' y 'NO usar para tests de React components'",
+    "xp_bonus": 15
+  },
+  "glosario": [
+    {"termino": "Trigger", "definicion": "Frase literal en la description del frontmatter que activa el skill cuando el usuario la dice o algo similar"},
+    {"termino": "auto_activate", "definicion": "Campo booleano que permite al skill activarse automaticamente al detectar contexto relevante"},
+    {"termino": "user_invocable", "definicion": "Campo booleano que permite al usuario invocar el skill directamente por nombre"},
+    {"termino": "Falso positivo", "definicion": "Cuando un skill se activa incorrectamente porque sus triggers son demasiado vagos"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Comparacion lado a lado de un frontmatter malo vs bueno. Izquierda (rojo): frontmatter con description de 1 linea vaga, sin exclusiones. Derecha (verde): frontmatter con description multi-linea, 4 triggers, 2 exclusiones, todos los campos. Flechas rojas senalando problemas a la izquierda, checks verdes a la derecha.",
+    "estilo": "split screen, rojo vs verde, iconos de error/check, fondo oscuro",
+    "plataforma": "1200x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["anatomia-skill-md"],
+    "siguiente_recomendado": ["progressive-disclosure"],
+    "relacionados": ["crear-skill-desde-cero"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["ejemplo-codigo-real-nunca-pseudo", "reto-ejecutable-verificable"],
+    "confidence": 0.93
+  }
+}

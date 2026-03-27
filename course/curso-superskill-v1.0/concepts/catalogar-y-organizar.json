@@ -1,0 +1,42 @@
+{
+  "id": "catalogar-y-organizar",
+  "orden": 12,
+  "titulo": "Catalogar y Organizar",
+  "tipo": "practica",
+  "zona": "Foro del Maestro",
+  "xp": 40,
+  "contenido": {
+    "explicacion": "El catalogo (catalog.json) es el registro centralizado de todas las skills creadas, mejoradas, fusionadas e importadas. Organiza las skills en 12 categorias (desarrollo-web, desarrollo-ia, automatizacion, documentacion, testing, seguridad, datos, productividad, educacion, blockchain, cms, meta-skill). Cada entrada incluye: id, nombre, descripcion, categoria, tipo (skill/micro-skill/plugin/fused-skill), tamano, ruta, version, tags, quality_score, y trazabilidad (source, parent_skills). El comando /skill-catalog permite listar, buscar, ver estadisticas, anadir y exportar.",
+    "explicacion_larga": "Un buen catalogo resuelve 3 problemas. Primero, descubrimiento: cuando no recuerdas que skills tienes, /skill-catalog --list las muestra agrupadas por categoria. Segundo, deduplicacion: antes de crear un skill nuevo, /skill-catalog --search verifica que no exista algo similar. Tercero, metricas: /skill-catalog --stats muestra cuantas skills tienes por categoria, calidad promedio, y actividad reciente. El esquema de cada entrada incluye campos de trazabilidad: source indica como se creo (created, imported, fused, improved), parent_skills lista las skills fuente en caso de fusion, y sinapsis_domain conecta con el sistema de instincts. Los tags permiten busqueda transversal: una skill puede estar en categoria 'desarrollo-web' pero tener tags 'typescript', 'react', 'testing' que la hacen encontrable desde multiples angulos.",
+    "metafora": "El catalogo es como el sistema de una biblioteca. Sin catalogo, tienes una pila de libros en el suelo y cada vez que necesitas uno, revisas toda la pila. Con catalogo, cada libro tiene su ficha (metadata), su estanteria (categoria), y sus descriptores (tags). El bibliotecario (/skill-catalog) puede encontrar cualquier libro en segundos, decirte cuantos libros tienes de cada tema, y avisarte si ya tienes un libro similar antes de comprar otro.",
+    "ejemplo_codigo": "# catalog.json — Ejemplo con 3 entradas\n{\n  \"version\": \"1.0.0\",\n  \"last_updated\": \"2026-03-26T12:00:00Z\",\n  \"skills\": [\n    {\n      \"id\": \"gitignore-gen\",\n      \"name\": \"Gitignore Generator\",\n      \"description\": \"Genera .gitignore segun stack detectado\",\n      \"category\": \"productividad\",\n      \"type\": \"micro-skill\",\n      \"size\": \"micro\",\n      \"path\": \"C:/Users/alimu/claude/superskill/created-skills/productividad/gitignore-gen\",\n      \"version\": \"1.0.0\",\n      \"tags\": [\"git\", \"config\", \"devops\"],\n      \"source\": \"created\",\n      \"quality_score\": 0.78\n    },\n    {\n      \"id\": \"react-toolkit\",\n      \"name\": \"React Toolkit\",\n      \"description\": \"Genera componentes React y tests\",\n      \"category\": \"desarrollo-web\",\n      \"type\": \"fused-skill\",\n      \"size\": \"complex\",\n      \"path\": \"C:/Users/alimu/claude/superskill/fusions/react-toolkit/result\",\n      \"version\": \"1.0.0\",\n      \"tags\": [\"react\", \"typescript\", \"testing\"],\n      \"source\": \"fused\",\n      \"parent_skills\": [\"react-component-gen\", \"react-test-gen\"],\n      \"quality_score\": 0.92\n    }\n  ]\n}\n\n# /skill-catalog --stats output:\n# Total: 2 skills (1 micro, 0 standard, 1 complex)\n# Categorias: productividad(1), desarrollo-web(1)\n# Quality promedio: 85/100"
+  },
+  "mini_reto": {
+    "titulo": "Cataloga 3 skills",
+    "descripcion": "Escribe las entradas de catalog.json para estas 3 skills:\n1. Un micro-skill que genera commit messages (source: created)\n2. Un plugin con 2 skills para WordPress (source: created, type: plugin)\n3. Una skill resultado de fusionar 2 skills de testing (source: fused)\n\nIncluye todos los campos obligatorios y asigna categorias y tags apropiados.",
+    "criterios_exito": ["3 entradas completas con todos los campos obligatorios", "Categorias correctas para cada skill", "Tags relevantes y no genericos", "parent_skills solo en la fused-skill"],
+    "respuesta_esperada": "commit-msg-gen (productividad, micro-skill, tags: git,commit), wp-toolkit (cms, plugin, tags: wordpress,theme), unified-tester (testing, fused-skill, parent_skills: [unit-test-gen, e2e-test-gen])",
+    "xp_bonus": 10
+  },
+  "glosario": [
+    {"termino": "catalog.json", "definicion": "Archivo JSON centralizado que registra todas las skills con metadata, categoria, version y quality score"},
+    {"termino": "Categoria", "definicion": "Una de 12 clasificaciones tematicas para organizar skills: desarrollo-web, desarrollo-ia, automatizacion, etc."},
+    {"termino": "Tags", "definicion": "Etiquetas transversales que permiten busqueda multi-dimensional mas alla de la categoria principal"},
+    {"termino": "Trazabilidad", "definicion": "Campos source y parent_skills que registran como se creo la skill y de donde proviene"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Dashboard visual del catalogo. Arriba: barra de busqueda con /skill-catalog --search. Centro: grid de 12 categorias como tarjetas con icono, nombre y conteo. Derecha: panel de estadisticas (total skills, distribucion por tipo, quality promedio). Abajo: ejemplo de entrada expandida con todos los campos.",
+    "estilo": "dashboard UI, tarjetas con sombra, iconos por categoria, fondo oscuro tipo IDE",
+    "plataforma": "1400x900px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["fusion-de-skills"],
+    "siguiente_recomendado": ["plugins-claude-code"],
+    "relacionados": ["crear-skill-desde-cero"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["ejemplo-codigo-real-nunca-pseudo"],
+    "confidence": 0.92
+  }
+}

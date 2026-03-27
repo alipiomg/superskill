@@ -1,0 +1,43 @@
+{
+  "id": "fusion-de-skills",
+  "orden": 11,
+  "titulo": "Fusion de Skills",
+  "tipo": "reto",
+  "zona": "Laboratorio de Creacion",
+  "xp": 55,
+  "contenido": {
+    "explicacion": "Fusionar skills es combinar 2 o mas skills existentes en una skill superior que integra las capacidades de todas las fuentes. El comando /skill-fuse ofrece 3 estrategias: merge (unifica todo en una sola skill cohesiva cuando hay solapamiento >50%), compose (crea un orquestador que delega a las skills originales cuando son independientes pero complementarias), y layer (una skill base + extensiones cuando una es subconjunto de la otra). El fusion-engine analiza solapamiento funcional, detecta conflictos (commands con mismo nombre, agentes duplicados), y los resuelve automaticamente o preguntando al usuario.",
+    "explicacion_larga": "La fusion es una operacion avanzada que requiere entender bien las 3 estrategias. Merge es la mas destructiva: desmonta ambas skills y las reconstruye como una sola. Ideal cuando tienes 2 skills que hacen cosas parecidas (ej: un generador de componentes React y otro de componentes Vue → un generador de componentes universal). Compose es la mas conservadora: mantiene las skills originales como agentes internos del orquestador. Ideal para skills de dominios distintos pero que se usan juntas (ej: generador de API + generador de documentacion → skill de desarrollo de API con docs). Layer es intermedia: una skill es la base y la otra la extiende. Ideal cuando una skill es una version mejorada o expandida de otra. La deteccion automatica de estrategia (auto) calcula solapamiento funcional y decide. Los conflictos de nombres se resuelven con prefijos, y los agentes duplicados se unifican.",
+    "metafora": "Fusionar skills es como fusionar empresas. Merge es una fusion completa: dos panaderias become una sola mas grande, con un unico menu combinado. Compose es una alianza estrategica: la panaderia y la cafeteria mantienen sus identidades pero operan bajo un mismo techo con un recepcionista comun. Layer es una expansion: la panaderia anade una seccion de pasteleria al negocio existente.",
+    "ejemplo_codigo": "# Ejemplo: Fusion compose de 2 skills\n\n# Skill A: react-component-gen (genera componentes React)\n# Skill B: react-test-gen (genera tests para componentes React)\n# Estrategia: compose (complementarias pero independientes)\n\n# Resultado: react-toolkit (orquestador)\n# SKILL.md:\n---\nname: react-toolkit\ndescription: |\n  Toolkit completo para React: genera componentes Y sus tests.\n  USAR cuando: \"generar componente React\", \"crear test React\",\n  \"componente con test\", \"React toolkit\".\nauthor: SalgadoIA\nversion: 1.0.0\n---\n\n# React Toolkit\n## Proposito\nOrquesta generacion de componentes React y sus tests.\n\n## Flujo\n1. Detectar que necesita el usuario: componente, test, o ambos\n2. Si componente: delegar a agents/component-gen.md\n3. Si test: delegar a agents/test-gen.md\n4. Si ambos: lanzar ambos agentes en paralelo\n\n# agents/component-gen.md ← Antiguo react-component-gen\n# agents/test-gen.md ← Antiguo react-test-gen\n\n# sources.json:\n# {\"strategy\": \"compose\", \"sources\": [\n#   {\"id\": \"react-component-gen\", \"role\": \"agent\"},\n#   {\"id\": \"react-test-gen\", \"role\": \"agent\"}\n# ]}"
+  },
+  "mini_reto": {
+    "titulo": "Planifica una fusion",
+    "descripcion": "Tienes 2 skills:\n- **markdown-table-gen**: Convierte texto en tablas Markdown (micro-skill, 60 lineas)\n- **csv-to-markdown**: Convierte archivos CSV a Markdown formateado (skill completa, con agent para procesar archivos grandes)\n\n1. Analiza el solapamiento funcional\n2. Recomienda una estrategia (merge/compose/layer) con justificacion\n3. Describe la estructura del resultado fusionado\n4. Identifica posibles conflictos y como resolverlos",
+    "criterios_exito": ["Identifica solapamiento (ambos generan Markdown desde datos)", "Justifica estrategia elegida coherentemente", "Describe estructura de archivos resultante", "Identifica al menos 1 conflicto potencial"],
+    "respuesta_esperada": "Estrategia: merge (solapamiento >50%, ambos convierten datos a markdown). Resultado: data-to-markdown con SKILL.md unificado que acepta tanto texto pegado como CSV. Conflicto: triggers solapados → unificar en una description comun.",
+    "xp_bonus": 20
+  },
+  "glosario": [
+    {"termino": "Merge", "definicion": "Estrategia de fusion que unifica 2+ skills en una sola skill cohesiva. Ideal para solapamiento alto"},
+    {"termino": "Compose", "definicion": "Estrategia que crea un orquestador que delega a las skills originales como sub-agentes"},
+    {"termino": "Layer", "definicion": "Estrategia que toma una skill como base y la otra como extension adicional"},
+    {"termino": "Solapamiento funcional", "definicion": "Porcentaje de capacidades compartidas entre las skills a fusionar"},
+    {"termino": "Fusion-engine", "definicion": "Agente que analiza, planifica y ejecuta la fusion de skills"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "3 paneles mostrando las 3 estrategias de fusion. Panel 1 'Merge': dos circulos solapados que se funden en uno (diagrama Venn). Panel 2 'Compose': dos circulos separados conectados por un cuadro central 'Orquestador'. Panel 3 'Layer': un circulo grande (base) con un circulo mas pequeno encima (extension). Debajo de cada panel: cuando usar, ejemplo.",
+    "estilo": "3 paneles horizontales, diagramas de conjuntos, colores azul-naranja-verde",
+    "plataforma": "1400x600px, formato curso online panoramico"
+  },
+  "conexiones": {
+    "prerequisitos": ["crear-skill-desde-cero"],
+    "siguiente_recomendado": ["catalogar-y-organizar"],
+    "relacionados": ["mejora-iterativa"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["reto-ejecutable-verificable", "metafora-experiencia-cotidiana"],
+    "confidence": 0.90
+  }
+}

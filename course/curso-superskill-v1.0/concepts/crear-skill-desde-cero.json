@@ -1,0 +1,42 @@
+{
+  "id": "crear-skill-desde-cero",
+  "orden": 8,
+  "titulo": "Crear Skill desde Cero",
+  "tipo": "reto",
+  "zona": "Laboratorio de Creacion",
+  "xp": 60,
+  "contenido": {
+    "explicacion": "Crear una skill desde cero sigue un pipeline de 7 pasos: captura de intent, clasificacion, generacion, validacion, testing, catalogacion y almacenamiento. El intent es la descripcion de lo que la skill debe hacer. La clasificacion determina si es micro-skill o skill completa. La generacion produce el SKILL.md y archivos auxiliares. La validacion verifica calidad contra la rubrica (frontmatter 0-25, contenido 0-25, estructura 0-25, reutilizacion 0-25). El testing opcional usa el skill-creator plugin para evals y benchmarks. La catalogacion registra la skill en catalog.json. Y el almacenamiento la guarda en el directorio correcto por categoria.",
+    "explicacion_larga": "El pipeline completo orquestado por /skill-create funciona asi: Primero, entrevista al usuario (que hace, cuando se activa, que output genera, que tan compleja es). Si el prompt es suficientemente descriptivo, infiere las respuestas. Segundo, clasifica: si es atomica y cabe en 100 lineas → micro-skill con template simple; si es multi-paso con agentes → skill completa con template extenso. Tercero, el agente skill-generator produce todos los archivos siguiendo las reglas de progressive disclosure, triggers especificos, y forma imperativa. Cuarto, valida contra la rubrica de calidad (score 0-100). Quinto, opcionalmente delega al skill-creator plugin de Anthropic para ejecutar evals formales con test cases, grading y benchmark. Sexto, registra en catalog.json con id unico, categoria, tags y quality_score. Septimo, guarda en created-skills/{categoria}/{nombre}/.",
+    "metafora": "Crear un skill es como fabricar un producto: primero entiendes que necesita el cliente (intent), luego decides si es un producto simple o complejo (clasificacion), lo fabricas con los materiales correctos (generacion), pasas control de calidad (validacion), lo pruebas en condiciones reales (testing), le pones la etiqueta y lo registras en inventario (catalogacion), y finalmente lo colocas en la estanteria correcta del almacen (almacenamiento).",
+    "ejemplo_codigo": "# Pipeline completo: crear un skill generador de APIs REST\n\n# Paso 1: Intent\n# \"Quiero un skill que genere APIs REST con Express y TypeScript\"\n\n# Paso 2: Clasificacion → skill completa (necesita agents y templates)\n\n# Paso 3: Generacion\n# SKILL.md:\n---\nname: express-api-gen\ndescription: |\n  Genera APIs REST con Express y TypeScript.\n  USAR cuando: \"generar API\", \"crear API REST\", \"Express API\".\n  NO usar para: GraphQL, FastAPI, o APIs existentes.\nauthor: SalgadoIA\nversion: 1.0.0\n---\n\n# Express API Generator\n## Proposito\nGenera APIs REST tipadas con Express y TypeScript.\n\n## Instrucciones\n1. Preguntar endpoints necesarios\n2. Generar estructura: routes/, controllers/, models/\n3. Usar templates/route.md para cada endpoint\n4. Validar con agents/api-validator.md\n\n# Paso 4: Validacion → Score 82/100\n# Paso 5: Testing con skill-creator plugin (opcional)\n# Paso 6: Catalogacion → catalog.json, categoria: desarrollo-web\n# Paso 7: Almacenamiento → created-skills/desarrollo-web/express-api-gen/"
+  },
+  "mini_reto": {
+    "titulo": "Crea un skill completo",
+    "descripcion": "Crea un skill completo (no micro-skill) que genere archivos de configuracion de ESLint optimizados para proyectos TypeScript con React. Debe incluir:\n1. SKILL.md con frontmatter profesional (5+ triggers, 2+ exclusiones)\n2. Un template de configuracion .eslintrc.json parametrizado\n3. Instrucciones claras de 5+ pasos\n4. Referencia a la documentacion oficial de ESLint (references/)\n\nGenera la estructura completa del directorio.",
+    "criterios_exito": ["SKILL.md con frontmatter completo y 5+ triggers", "Template parametrizado en templates/", "Referencia a docs en references/", "Instrucciones de 5+ pasos en forma imperativa"],
+    "respuesta_esperada": "eslint-config-gen/ con SKILL.md (frontmatter + instrucciones), templates/eslintrc.md (template parametrizado), references/eslint-rules.md (documentacion de reglas principales)",
+    "xp_bonus": 25
+  },
+  "glosario": [
+    {"termino": "Pipeline de creacion", "definicion": "Secuencia de 7 pasos: intent → clasificacion → generacion → validacion → testing → catalogacion → almacenamiento"},
+    {"termino": "Quality Score", "definicion": "Puntuacion 0-100 basada en rubrica de 4 dimensiones: frontmatter, contenido, estructura, reutilizacion"},
+    {"termino": "Intent", "definicion": "Descripcion funcional de lo que debe hacer la skill, capturada del usuario en el primer paso del pipeline"},
+    {"termino": "Rubrica", "definicion": "Criterios de evaluacion estandarizados para medir calidad de una skill"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Pipeline horizontal de 7 pasos representados como estaciones de una linea de produccion. Cada estacion tiene un icono y nombre: 1-Intent (microfono), 2-Clasificacion (balanza), 3-Generacion (engranaje), 4-Validacion (check), 5-Testing (probeta), 6-Catalogacion (etiqueta), 7-Almacenamiento (caja). Flechas conectando estaciones. Debajo de cada una, una linea describiendo la accion.",
+    "estilo": "linea de produccion horizontal, iconos industriales, colores progresivos azul a verde",
+    "plataforma": "1400x600px, formato curso online panoramico"
+  },
+  "conexiones": {
+    "prerequisitos": ["que-es-un-skill"],
+    "siguiente_recomendado": ["testing-y-evaluacion", "fusion-de-skills"],
+    "relacionados": ["micro-skills", "anatomia-skill-md"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "skill_creada_en_reto",
+    "instincts_aplicables": ["reto-ejecutable-verificable", "ejemplo-codigo-real-nunca-pseudo"],
+    "confidence": 0.95
+  }
+}

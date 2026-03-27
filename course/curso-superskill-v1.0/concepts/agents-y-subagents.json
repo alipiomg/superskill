@@ -1,0 +1,41 @@
+{
+  "id": "agents-y-subagents",
+  "orden": 5,
+  "titulo": "Agents y Subagents",
+  "tipo": "practica",
+  "zona": "Taller de Forja",
+  "xp": 40,
+  "contenido": {
+    "explicacion": "Un agent dentro de un skill es un archivo .md en agents/ que define un subproceso especializado. Cuando Claude ejecuta tu skill y encuentra una tarea compleja que beneficia de contexto aislado, lanza un subagente usando la herramienta Agent. El agente recibe un prompt con instrucciones, trabaja de forma autonoma (puede leer archivos, ejecutar comandos, buscar codigo), y devuelve un resultado. Los agentes son ideales para: analisis de codigo extenso, generacion de multiples archivos, evaluacion/testing, y cualquier tarea que no deberia contaminar el contexto de la conversacion principal.",
+    "explicacion_larga": "Un agent se define como un archivo Markdown en agents/{nombre}.md con secciones claras: Input esperado (que recibe del skill), Proceso (pasos que ejecuta), y Output (que devuelve). Cuando el SKILL.md necesita delegar, usa el tool Agent con subagent_type='general-purpose' y le pasa el prompt basado en las instrucciones del agent. El agente trabaja en su propio contexto, lo que significa que puede procesar grandes cantidades de informacion sin llenar el contexto de la conversacion principal. Los agentes pueden ejecutar en paralelo: si tu skill necesita analizar 3 archivos independientes, puede lanzar 3 agentes simultaneos. Regla clave: solo crea un agent si la tarea es genuinamente compleja. Una tarea de 3 pasos simples no necesita un agente — hazla inline en el SKILL.md.",
+    "metafora": "Los agentes son como los especialistas de un hospital. El medico general (tu SKILL.md) diagnostica y coordina. Pero cuando necesita una resonancia magnetica, no la hace el mismo — envia al paciente al radiologo (agent). El radiologo trabaja en su sala aislada con su propio equipo, y devuelve el resultado al medico general. No tendria sentido enviar al radiologo para tomar la temperatura — eso lo hace el medico general directamente.",
+    "ejemplo_codigo": "# agents/code-analyzer.md\n# ---\n# Agente: Code Analyzer\n# ---\n# ## Input esperado\n# - file_paths: Lista de archivos a analizar\n# - analysis_type: 'security' | 'performance' | 'quality'\n#\n# ## Proceso\n# 1. Leer cada archivo con Read tool\n# 2. Analizar segun analysis_type\n# 3. Generar reporte con hallazgos\n#\n# ## Output\n# Reporte Markdown con:\n# - Lista de issues encontrados\n# - Severidad de cada issue\n# - Sugerencia de fix\n\n# Como se invoca desde SKILL.md:\n# \"Lanzar agente code-analyzer (agents/code-analyzer.md)\n#  con los archivos detectados y analysis_type='security'\""
+  },
+  "mini_reto": {
+    "titulo": "Disena un agente",
+    "descripcion": "Disena un agente para un skill que genera documentacion de API. El agente debe:\n1. Recibir una lista de archivos de rutas Express\n2. Extraer los endpoints (metodo, ruta, parametros)\n3. Generar documentacion Markdown con tabla de endpoints\n\nEscribe el archivo agents/doc-extractor.md con las 3 secciones: Input, Proceso, Output.",
+    "criterios_exito": ["Input documentado con tipos claros", "Proceso en 3+ pasos especificos", "Output describe formato exacto del resultado", "No incluye tareas triviales que deberian ser inline"],
+    "respuesta_esperada": "Agent con input (file_paths: string[]), proceso (leer archivos, extraer con regex, formatear tabla), output (markdown con tabla metodo|ruta|params|descripcion)",
+    "xp_bonus": 15
+  },
+  "glosario": [
+    {"termino": "Subagente", "definicion": "Proceso autonomo lanzado por Claude con contexto aislado para ejecutar tareas complejas sin contaminar la conversacion"},
+    {"termino": "Contexto aislado", "definicion": "El agente tiene su propia ventana de contexto, separada de la conversacion principal"},
+    {"termino": "Ejecucion en paralelo", "definicion": "Multiples agentes pueden ejecutar simultaneamente para tareas independientes"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Diagrama de flujo mostrando SKILL.md en el centro enviando tareas a 3 agentes en paralelo. SKILL.md (cuadro verde) con flechas hacia: Agent 1 - Analyzer (cuadro azul), Agent 2 - Generator (cuadro naranja), Agent 3 - Tester (cuadro morado). Cada agente tiene su burbuja de contexto aislada. Flechas de retorno con resultados hacia SKILL.md.",
+    "estilo": "flow diagram, burbujas de contexto, colores diferenciados por agente, fondo oscuro",
+    "plataforma": "1200x800px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["progressive-disclosure"],
+    "siguiente_recomendado": ["scripts-y-references"],
+    "relacionados": ["crear-skill-desde-cero"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["reto-ejecutable-verificable", "ejemplo-codigo-real-nunca-pseudo"],
+    "confidence": 0.91
+  }
+}

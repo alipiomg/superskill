@@ -1,0 +1,42 @@
+{
+  "id": "curso-superskill",
+  "version": "1.0.0",
+  "title": "La Forja de Skills",
+  "subtitle": "Domina la creacion de Skills, Micro-Skills y Plugins en Claude Code Desktop",
+  "dominio": "Claude Code Skills Development",
+  "nivel_dificultad": "intermedio",
+  "objetivos_pedagogicos": [
+    "Comprender la anatomia completa de una skill de Claude Code",
+    "Crear skills y micro-skills profesionales desde cero",
+    "Dominar la mejora iterativa y la fusion de skills",
+    "Disenar y distribuir plugins para Claude Code Desktop",
+    "Organizar y catalogar un ecosistema de skills propio"
+  ],
+  "nodos": [
+    {"id": "que-es-un-skill", "orden": 1, "titulo": "Que es un Skill", "tipo": "teoria", "prerequisitos": [], "conexiones": ["anatomia-skill-md", "micro-skills", "crear-skill-desde-cero"], "xp": 25, "zona": "Plaza del Aprendiz"},
+    {"id": "anatomia-skill-md", "orden": 2, "titulo": "Anatomia de SKILL.md", "tipo": "teoria", "prerequisitos": ["que-es-un-skill"], "conexiones": ["frontmatter-y-triggers", "progressive-disclosure", "scripts-y-references"], "xp": 30, "zona": "Plaza del Aprendiz"},
+    {"id": "frontmatter-y-triggers", "orden": 3, "titulo": "Frontmatter y Triggers", "tipo": "practica", "prerequisitos": ["anatomia-skill-md"], "conexiones": [], "xp": 40, "zona": "Taller de Forja"},
+    {"id": "progressive-disclosure", "orden": 4, "titulo": "Progressive Disclosure", "tipo": "teoria", "prerequisitos": ["anatomia-skill-md"], "conexiones": ["agents-y-subagents"], "xp": 30, "zona": "Plaza del Aprendiz"},
+    {"id": "agents-y-subagents", "orden": 5, "titulo": "Agents y Subagents", "tipo": "practica", "prerequisitos": ["progressive-disclosure"], "conexiones": [], "xp": 40, "zona": "Taller de Forja"},
+    {"id": "scripts-y-references", "orden": 6, "titulo": "Scripts y References", "tipo": "practica", "prerequisitos": ["anatomia-skill-md"], "conexiones": [], "xp": 35, "zona": "Taller de Forja"},
+    {"id": "micro-skills", "orden": 7, "titulo": "Micro-Skills", "tipo": "practica", "prerequisitos": ["que-es-un-skill"], "conexiones": [], "xp": 40, "zona": "Taller de Forja"},
+    {"id": "crear-skill-desde-cero", "orden": 8, "titulo": "Crear Skill desde Cero", "tipo": "reto", "prerequisitos": ["que-es-un-skill"], "conexiones": ["testing-y-evaluacion", "fusion-de-skills"], "xp": 60, "zona": "Laboratorio de Creacion"},
+    {"id": "testing-y-evaluacion", "orden": 9, "titulo": "Testing y Evaluacion", "tipo": "practica", "prerequisitos": ["crear-skill-desde-cero"], "conexiones": ["mejora-iterativa"], "xp": 45, "zona": "Laboratorio de Creacion"},
+    {"id": "mejora-iterativa", "orden": 10, "titulo": "Mejora Iterativa", "tipo": "practica", "prerequisitos": ["testing-y-evaluacion"], "conexiones": [], "xp": 45, "zona": "Laboratorio de Creacion"},
+    {"id": "fusion-de-skills", "orden": 11, "titulo": "Fusion de Skills", "tipo": "reto", "prerequisitos": ["crear-skill-desde-cero"], "conexiones": ["catalogar-y-organizar"], "xp": 55, "zona": "Laboratorio de Creacion"},
+    {"id": "catalogar-y-organizar", "orden": 12, "titulo": "Catalogar y Organizar", "tipo": "practica", "prerequisitos": ["fusion-de-skills"], "conexiones": ["plugins-claude-code"], "xp": 40, "zona": "Foro del Maestro"},
+    {"id": "plugins-claude-code", "orden": 13, "titulo": "Plugins en Claude Code", "tipo": "teoria-practica", "prerequisitos": ["catalogar-y-organizar"], "conexiones": [], "xp": 55, "zona": "Foro del Maestro"}
+  ],
+  "rutas_pedagogicas": [
+    {"id": "lineal", "nombre": "Ruta Lineal", "descripcion": "Recorre todos los conceptos en orden secuencial", "nodos": ["que-es-un-skill", "anatomia-skill-md", "frontmatter-y-triggers", "progressive-disclosure", "agents-y-subagents", "scripts-y-references", "micro-skills", "crear-skill-desde-cero", "testing-y-evaluacion", "mejora-iterativa", "fusion-de-skills", "catalogar-y-organizar", "plugins-claude-code"], "recomendada": true},
+    {"id": "practica", "nombre": "Ruta Practica", "descripcion": "Aprende haciendo, salta la teoria pura", "nodos": ["que-es-un-skill", "anatomia-skill-md", "micro-skills", "crear-skill-desde-cero", "testing-y-evaluacion", "fusion-de-skills", "catalogar-y-organizar", "plugins-claude-code"], "recomendada": false},
+    {"id": "arquitecto", "nombre": "Ruta Arquitecto", "descripcion": "Foco en arquitectura y diseno avanzado", "nodos": ["que-es-un-skill", "anatomia-skill-md", "progressive-disclosure", "agents-y-subagents", "scripts-y-references", "crear-skill-desde-cero", "mejora-iterativa", "fusion-de-skills", "plugins-claude-code"], "recomendada": false}
+  ],
+  "metadata": {
+    "author": "SalgadoIA",
+    "created_at": "2026-03-26",
+    "instincts_aplicados": ["microleccion-6-secciones-obligatorias", "mapa-max-15-nodos", "reto-ejecutable-verificable", "metafora-experiencia-cotidiana", "ejemplo-codigo-real-nunca-pseudo"],
+    "total_xp": 540,
+    "total_nodos": 13
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "testing-y-evaluacion",
+  "orden": 9,
+  "titulo": "Testing y Evaluacion",
+  "tipo": "practica",
+  "zona": "Laboratorio de Creacion",
+  "xp": 45,
+  "contenido": {
+    "explicacion": "Testing de skills no es como testing de codigo convencional. No hay unit tests ni asserts tradicionales. En su lugar, el skill-creator plugin de Anthropic proporciona un pipeline de evaluacion basado en subagentes: defines test cases (prompts que deberian activar el skill), un grader que evalua la calidad del output, y un benchmark que agrega resultados. El testing responde a la pregunta: si un usuario dice X, mi skill responde correctamente y con calidad? El resultado es un pass rate, metricas de tokens/tiempo, y un viewer HTML para revisar cada caso.",
+    "explicacion_larga": "El pipeline de testing del skill-creator plugin tiene 4 componentes. Primero, evals.json define los test cases: cada caso tiene un prompt (lo que dice el usuario), expected_behavior (que deberia hacer el skill), y assertions (verificaciones especificas). Segundo, el runner ejecuta cada test case lanzando un subagente con la skill cargada y capturando el output. Tercero, el grader evalua cada output contra las assertions: puede verificar presencia de contenido, estructura de archivos generados, o calidad subjetiva del resultado. Cuarto, el benchmark agrega todos los resultados en benchmark.json con pass rate, token usage, timing, y estadisticas. El viewer HTML permite revisar visualmente cada caso, ver que paso y que fallo, y decidir que mejorar. Para testing de triggers (la description del frontmatter), hay un pipeline separado que genera 20 queries (10 should-trigger, 10 should-not-trigger) y optimiza iterativamente la description.",
+    "metafora": "Testear un skill es como hacer una cata de vinos. No puedes meter un vino en una maquina y obtener un numero de calidad. Necesitas un catador experto (grader) que pruebe el vino (output) y evaluo aroma, sabor, cuerpo (assertions). Luego, catando multiples vinos (benchmark), puedes comparar cual es mejor. Y la ficha de cata (viewer HTML) te permite revisar las notas de cada vino.",
+    "ejemplo_codigo": "# evals.json — Definicion de test cases\n{\n  \"skill\": \"express-api-gen\",\n  \"cases\": [\n    {\n      \"id\": \"basic-crud\",\n      \"prompt\": \"Genera una API REST para gestionar usuarios con CRUD completo\",\n      \"expected_behavior\": \"Genera archivos routes/users.ts, controllers/users.ts, models/user.ts\",\n      \"assertions\": [\n        {\"type\": \"file_exists\", \"path\": \"routes/users.ts\"},\n        {\"type\": \"content_contains\", \"file\": \"routes/users.ts\", \"text\": \"router.get\"},\n        {\"type\": \"content_contains\", \"file\": \"routes/users.ts\", \"text\": \"router.post\"}\n      ]\n    },\n    {\n      \"id\": \"auth-endpoints\",\n      \"prompt\": \"Genera endpoints de autenticacion con JWT\",\n      \"expected_behavior\": \"Genera login y register con middleware de auth\",\n      \"assertions\": [\n        {\"type\": \"content_contains\", \"file\": \"routes/auth.ts\", \"text\": \"jwt\"}\n      ]\n    }\n  ]\n}\n\n# benchmark.json — Resultado agregado\n# { \"pass_rate\": 0.85, \"avg_tokens\": 1200, \"avg_time_ms\": 4500 }"
+  },
+  "mini_reto": {
+    "titulo": "Disena test cases",
+    "descripcion": "Para el skill gitignore-gen (genera .gitignore segun stack), disena 4 test cases:\n1. Proyecto Node.js (package.json presente)\n2. Proyecto Python (requirements.txt presente)\n3. Proyecto sin stack detectable\n4. Proyecto con multiples stacks (Node + Python)\n\nPara cada caso, escribe: prompt, expected_behavior, y 2 assertions.",
+    "criterios_exito": ["4 test cases completos", "Cada caso tiene prompt, expected_behavior y 2+ assertions", "Cubre caso edge (sin stack, multi-stack)", "Assertions verifican contenido especifico del .gitignore generado"],
+    "respuesta_esperada": "4 cases con prompts como 'genera gitignore para este proyecto Node', assertions como content_contains 'node_modules' y file_exists '.gitignore'",
+    "xp_bonus": 15
+  },
+  "glosario": [
+    {"termino": "Test case", "definicion": "Caso de prueba con prompt de entrada, comportamiento esperado, y assertions para verificar"},
+    {"termino": "Grader", "definicion": "Subagente evaluador que verifica assertions contra el output real del skill"},
+    {"termino": "Benchmark", "definicion": "Agregacion de resultados de multiples test cases: pass rate, tokens, timing"},
+    {"termino": "Pass rate", "definicion": "Porcentaje de test cases que pasan todas sus assertions (0.0-1.0)"},
+    {"termino": "Viewer HTML", "definicion": "Interfaz visual para revisar resultados de tests caso por caso"}
+  ],
+  "prompt_infografia": {
+    "descripcion": "Pipeline de testing en 4 fases horizontales. Fase 1: evals.json (icono de lista) con test cases. Fase 2: Runner (icono de play) ejecutando con subagentes. Fase 3: Grader (icono de lupa) evaluando assertions. Fase 4: Benchmark (icono de grafico) con pass rate y metricas. Debajo: screenshot del viewer HTML mostrando resultados verdes/rojos.",
+    "estilo": "pipeline horizontal, iconos de laboratorio, verde para pass / rojo para fail",
+    "plataforma": "1400x700px, formato curso online"
+  },
+  "conexiones": {
+    "prerequisitos": ["crear-skill-desde-cero"],
+    "siguiente_recomendado": ["mejora-iterativa"],
+    "relacionados": ["fusion-de-skills"]
+  },
+  "metadata_sinapsis": {
+    "observable_key": "leccion_completada",
+    "instincts_aplicables": ["reto-ejecutable-verificable"],
+    "confidence": 0.90
+  }
+}
