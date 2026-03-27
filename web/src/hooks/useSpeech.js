@@ -28,6 +28,7 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
   const onResultRef = useRef(onResult);
   const voiceModeRef = useRef(voiceMode);
   const autoListenAfterSpeakRef = useRef(false);
+  const wantListeningRef = useRef(false); // tracks if we WANT to be listening
 
   onResultRef.current = onResult;
   voiceModeRef.current = voiceMode;
@@ -47,8 +48,10 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
     const recognition = new SpeechRecognition();
     recognition.lang = lang;
     recognition.interimResults = true;
-    recognition.continuous = false;
+    recognition.continuous = true; // Keep listening until user stops
     recognition.maxAlternatives = 1;
+
+    let silenceTimer = null;
 
     recognition.onresult = (event) => {
       const results = event.results;
@@ -57,29 +60,58 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
 
       setTranscript(text);
 
+      // Clear any silence timer — user is speaking
+      if (silenceTimer) clearTimeout(silenceTimer);
+
       if (last.isFinal) {
-        setIsListening(false);
-        setTranscript('');
-        onResultRef.current?.(text);
+        // User finished a phrase — wait a moment for more, then send
+        silenceTimer = setTimeout(() => {
+          wantListeningRef.current = false;
+          setIsListening(false);
+          setTranscript('');
+          try { recognition.stop(); } catch {}
+          onResultRef.current?.(text);
+        }, 1200); // 1.2s of silence after final result = done
       }
     };
 
     recognition.onerror = (event) => {
-      // 'no-speech' is normal — user didn't say anything, not a real error
-      if (event.error !== 'no-speech' && event.error !== 'aborted') {
+      if (event.error === 'no-speech') {
+        // No speech detected — restart if we still want to listen
+        if (wantListeningRef.current) {
+          try { recognition.stop(); } catch {}
+          // Will restart via onend
+          return;
+        }
+      }
+      if (event.error !== 'aborted') {
         console.warn('Speech recognition error:', event.error);
       }
+      wantListeningRef.current = false;
       setIsListening(false);
       setTranscript('');
     };
 
     recognition.onend = () => {
+      if (silenceTimer) clearTimeout(silenceTimer);
+      // If we still want to be listening, restart (handles no-speech timeout)
+      if (wantListeningRef.current) {
+        try {
+          recognition.start();
+        } catch {
+          wantListeningRef.current = false;
+          setIsListening(false);
+        }
+        return;
+      }
       setIsListening(false);
     };
 
     recognitionRef.current = recognition;
 
     return () => {
+      if (silenceTimer) clearTimeout(silenceTimer);
+      wantListeningRef.current = false;
       recognition.abort();
     };
   }, [lang]);
@@ -87,7 +119,7 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
   // Load voices (needed for some browsers)
   useEffect(() => {
     if (!synth) return;
-    synth.getVoices(); // trigger load
+    synth.getVoices();
     synth.onvoiceschanged = () => synth.getVoices();
   }, []);
 
@@ -97,21 +129,31 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
     synth?.cancel();
     setIsSpeaking(false);
     setTranscript('');
+    wantListeningRef.current = true;
     setIsListening(true);
     try {
       recognitionRef.current.start();
     } catch {
-      // Already started
-      setIsListening(false);
+      // Already started — stop and restart
+      try {
+        recognitionRef.current.stop();
+        setTimeout(() => {
+          try { recognitionRef.current.start(); } catch {}
+        }, 100);
+      } catch {
+        wantListeningRef.current = false;
+        setIsListening(false);
+      }
     }
   }, [isListening]);
 
   const stopListening = useCallback(() => {
-    if (!recognitionRef.current || !isListening) return;
-    recognitionRef.current.stop();
+    wantListeningRef.current = false;
+    if (!recognitionRef.current) return;
+    try { recognitionRef.current.stop(); } catch {}
     setIsListening(false);
     setTranscript('');
-  }, [isListening]);
+  }, []);
 
   // Pick a Spanish voice
   const getSpanishVoice = useCallback(() => {
@@ -167,14 +209,16 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
             setTimeout(() => {
               if (voiceModeRef.current && recognitionRef.current) {
                 setTranscript('');
+                wantListeningRef.current = true;
                 setIsListening(true);
                 try {
                   recognitionRef.current.start();
                 } catch {
+                  wantListeningRef.current = false;
                   setIsListening(false);
                 }
               }
-            }, 400); // Small pause before listening again
+            }, 500);
           }
         };
 
@@ -203,6 +247,7 @@ export default function useSpeech({ lang = 'es-ES', onResult } = {}) {
         synth?.cancel();
         setIsSpeaking(false);
         autoListenAfterSpeakRef.current = false;
+        wantListeningRef.current = false;
         if (recognitionRef.current) {
           try { recognitionRef.current.stop(); } catch {}
         }
