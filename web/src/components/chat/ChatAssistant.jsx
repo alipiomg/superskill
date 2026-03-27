@@ -6,6 +6,7 @@ import { processMessage } from '../../services/ruleEngine';
 import { buildUserContext } from '../../services/contextBuilder';
 import { quickChips as quickChipsMap } from '../../data/assistantKnowledge';
 import { courseNodes } from '../../data/courseData';
+import useSpeech from '../../hooks/useSpeech';
 import ChatBubble from './ChatBubble';
 import ChatPanel from './ChatPanel';
 
@@ -46,6 +47,17 @@ export default function ChatAssistant() {
   const { progress, level } = useProgress();
   const location = useLocation();
 
+  // Speech hook — voice input sends message, voice output reads responses
+  const speech = useSpeech({
+    lang: 'es-ES',
+    onResult: (text) => {
+      // Voice input recognized → send as message
+      if (text.trim()) {
+        handleSend(text.trim());
+      }
+    },
+  });
+
   const addMessage = useCallback((msg) => {
     setMessages((prev) => [...prev, { ...msg, id: `msg-${++msgIdCounter}` }]);
   }, []);
@@ -58,12 +70,18 @@ export default function ChatAssistant() {
       initializedRef.current = true;
       const greeting = getGreeting(progress, level);
       addMessage(greeting);
+      // Speak greeting if voice is enabled
+      if (speech.speakEnabled) {
+        speech.speak(greeting.text);
+      }
     }
-  }, [progress, level, addMessage]);
+  }, [progress, level, addMessage, speech]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-  }, []);
+    speech.stopSpeaking();
+    speech.stopListening();
+  }, [speech]);
 
   const handleSend = useCallback(
     async (text) => {
@@ -76,13 +94,19 @@ export default function ChatAssistant() {
       try {
         const userContext = buildUserContext(progress, level);
         const response = processMessage(text, userContext, location.pathname);
-        addMessage({
+        const assistantMsg = {
           role: 'assistant',
           text: response.text,
-          links: response.links?.map(l => ({ label: l.label, to: l.path })),
+          links: response.links?.map((l) => ({ label: l.label, to: l.path })),
           chips: response.chips,
           timestamp: Date.now(),
-        });
+        };
+        addMessage(assistantMsg);
+
+        // Auto-speak response if voice output is enabled
+        if (speech.speakEnabled) {
+          speech.speak(response.text);
+        }
       } catch {
         addMessage({
           role: 'assistant',
@@ -93,7 +117,7 @@ export default function ChatAssistant() {
         setIsTyping(false);
       }
     },
-    [progress, level, location.pathname, addMessage],
+    [progress, level, location.pathname, addMessage, speech],
   );
 
   const handleChipClick = useCallback(
@@ -124,6 +148,15 @@ export default function ChatAssistant() {
             mode={mode}
             onToggleMode={toggleMode}
             onChipClick={handleChipClick}
+            // Speech props
+            speakEnabled={speech.speakEnabled}
+            onToggleSpeak={speech.toggleSpeak}
+            isSpeaking={speech.isSpeaking}
+            isListening={speech.isListening}
+            transcript={speech.transcript}
+            onStartListening={speech.startListening}
+            onStopListening={speech.stopListening}
+            speechSupported={speech.supported}
           />
         )}
       </AnimatePresence>

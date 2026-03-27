@@ -12,6 +12,15 @@ export default function ChatPanel({
   mode,
   onToggleMode,
   onChipClick,
+  // Speech props
+  speakEnabled,
+  onToggleSpeak,
+  isSpeaking,
+  isListening,
+  transcript,
+  onStartListening,
+  onStopListening,
+  speechSupported,
 }) {
   return (
     <motion.div
@@ -27,9 +36,26 @@ export default function ChatPanel({
         flex flex-col overflow-hidden
       "
     >
-      <ChatHeader onClose={onClose} mode={mode} onToggleMode={onToggleMode} />
+      <ChatHeader
+        onClose={onClose}
+        mode={mode}
+        onToggleMode={onToggleMode}
+        speakEnabled={speakEnabled}
+        onToggleSpeak={onToggleSpeak}
+        isSpeaking={isSpeaking}
+        speechSynthesisSupported={speechSupported?.synthesis}
+      />
       <ChatMessages messages={messages} onChipClick={onChipClick} isTyping={isTyping} />
-      <ChatInput onSend={onSend} chips={chips} disabled={isTyping} />
+      <ChatInput
+        onSend={onSend}
+        chips={chips}
+        disabled={isTyping}
+        isListening={isListening}
+        transcript={transcript}
+        onStartListening={onStartListening}
+        onStopListening={onStopListening}
+        speechSupported={speechSupported?.recognition}
+      />
     </motion.div>
   );
 }
