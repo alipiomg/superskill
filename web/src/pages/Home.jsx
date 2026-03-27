@@ -19,6 +19,15 @@ const features = [
 
 const courses = [
   {
+    icon: Brain,
+    title: 'Curso Claude',
+    desc: '16 lecciones sobre el ecosistema Claude: modelos, Co-work, Skills 2.0, Agents, Code',
+    lessons: 16,
+    color: 'from-blue-500 to-cyan-500',
+    border: 'border-blue-500/20 hover:border-blue-500/40',
+    link: '/curso-claude',
+  },
+  {
     icon: GraduationCap,
     title: 'Curso Skills',
     desc: '16 lecciones gamificadas sobre crear, mejorar y fusionar Skills para Claude Code',
@@ -35,15 +44,6 @@ const courses = [
     color: 'from-purple-500 to-violet-500',
     border: 'border-purple-500/20 hover:border-purple-500/40',
     link: '/curso-paperclip',
-  },
-  {
-    icon: Brain,
-    title: 'Curso Claude',
-    desc: '16 lecciones sobre el ecosistema Claude: modelos, Co-work, Skills 2.0, Agents, Code',
-    lessons: 16,
-    color: 'from-blue-500 to-cyan-500',
-    border: 'border-blue-500/20 hover:border-blue-500/40',
-    link: '/curso-claude',
   },
 ];
 

@@ -15,9 +15,9 @@ const navGroups = [
   {
     label: 'Aprender',
     items: [
+      { to: '/curso-claude', icon: Brain, label: 'Curso Claude' },
       { to: '/curso', icon: GraduationCap, label: 'Curso Skills' },
       { to: '/curso-paperclip', icon: Building2, label: 'Curso Paperclip' },
-      { to: '/curso-claude', icon: Brain, label: 'Curso Claude' },
     ],
   },
   {
