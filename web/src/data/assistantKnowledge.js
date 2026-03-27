@@ -75,6 +75,7 @@ export const appSections = {
   plugins: { path: '/plugins', name: 'Plugins', description: 'Crear plugins distribuibles para Claude Code', icon: 'Plug' },
   agentes: { path: '/agentes', name: 'ARTgents', description: 'SuperAgentes con SuperHabilidades', icon: 'Shield' },
   ejemploMarca: { path: '/ejemplo-marca', name: 'Ejemplo Marca', description: 'Crea tu plugin de branding personal', icon: 'Paintbrush' },
+  automatizaciones: { path: '/automatizaciones', name: 'Automatizaciones', description: 'Tareas programadas, monitorización, deploys, backups, alertas y mantenimiento', icon: 'Timer' },
   configuracion: { path: '/configuracion', name: 'Configuracion', description: 'Configurar .claude, settings, hooks, repos', icon: 'Settings' },
 };
 
@@ -86,6 +87,7 @@ export const quickChips = {
   '/catalogo': ['Que categorias hay?', 'Buscar skill', 'Como catalogo?'],
   '/agentes': ['Que es un ARTgent?', 'Como creo un agente?', 'SuperAgentes'],
   '/plugins': ['Que es un plugin?', 'Como creo uno?', 'Marketplace'],
+  '/automatizaciones': ['Que es un cron job?', 'Como monitorizo mi web?', 'Backups automaticos'],
   '/configuracion': ['Como configuro .claude?', 'Repos recomendados', 'Hooks'],
 };
 
@@ -124,4 +126,11 @@ export const conceptDefinitions = {
   'constructor': 'El Constructor tiene 5 modos: SuperConstructor (prompt libre con IA), Crear Skill, Micro-Skill, Mejorar y Fusionar.',
   'rubrica': 'La rubrica de calidad evalua skills de 0-100 en 4 dimensiones: frontmatter, contenido, estructura y reutilizacion.',
   'catalogo': 'El Catalogo organiza skills en 12 categorias: desarrollo web, IA, automatizacion, documentacion, testing, seguridad, datos, productividad, educacion, blockchain, CMS y meta-skill.',
+  'automatizaciones': 'Las Automatizaciones cubren todo lo que necesitas para mantener webs en produccion: cron jobs, health checks, CI/CD, backups, alertas y mantenimiento. La seccion AutoPilot te enseña a configurarlo todo.',
+  'cron': 'Un cron job es una tarea programada que se ejecuta automaticamente en intervalos definidos. Por ejemplo: backup cada noche, health check cada 5 minutos, reporte semanal cada lunes.',
+  'health check': 'Un health check es un endpoint (/health) que verifica que tu web y sus servicios (DB, cache, disco) funcionan correctamente. Se consulta cada pocos minutos.',
+  'ci/cd': 'CI/CD (Integracion Continua / Deploy Continuo) es un pipeline automatico: cada push ejecuta tests, build y deploy sin intervencion manual.',
+  'deploy': 'Deploy es el proceso de publicar tu codigo en produccion. Con CI/CD se automatiza: push → tests → build → produccion.',
+  'backup': 'Un backup es una copia de seguridad de tus datos. Regla 3-2-1: 3 copias, 2 medios diferentes, 1 fuera del sitio. Automatiza y prueba restaurar.',
+  'monitoring': 'Monitorización es vigilar que tus webs esten online, rapidas y sin errores 24/7. Usa UptimeRobot, Grafana o scripts propios.',
 };

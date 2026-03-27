@@ -11,6 +11,7 @@ import Agentes from './pages/Agentes'
 import Marketplace from './pages/Marketplace'
 import BrandExample from './pages/BrandExample'
 import Guia from './pages/Guia'
+import Automatizaciones from './pages/Automatizaciones'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/ejemplo-marca" element={<BrandExample />} />
         <Route path="/guia" element={<Guia />} />
+        <Route path="/automatizaciones" element={<Automatizaciones />} />
         <Route path="/configuracion" element={<Configuracion />} />
       </Route>
     </Routes>

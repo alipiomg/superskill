@@ -283,6 +283,7 @@ function handleNavigate(message) {
     plugins: ['plugins', 'plugin', 'paquete', 'distribuir', 'empaquetar'],
     agentes: ['agentes', 'artgents', 'agente', 'superagentes', 'superagente', 'arena'],
     ejemploMarca: ['ejemplo marca', 'branding', 'marca personal', 'marca'],
+    automatizaciones: ['automatizaciones', 'automatizar', 'autopilot', 'cron', 'programaciones', 'tareas programadas', 'monitorizar', 'monitorizacion', 'health check', 'deploys automaticos', 'ci cd'],
     configuracion: ['configuracion', 'config', 'settings', 'ajustes', 'hooks', 'repos recomendados', '.claude'],
   };
 
@@ -425,6 +426,16 @@ function handleHowTo(message, userContext) {
       text: 'Para configurar tu entorno:\n\n1. Ve a Configuracion para gestionar tu setup de Claude Code\n2. Configura el directorio .claude/ con settings.json y hooks\n3. Define repos recomendados para tus skills\n4. Activa hooks personalizados para automatizar tareas\n5. La leccion de configuracion en el curso te guia paso a paso',
       links: [{ label: 'Ir a Configuracion', path: '/configuracion' }],
       chips: ['Que son los hooks?', 'Repos recomendados', 'Mi progreso'],
+    },
+    'automatizo': {
+      text: 'Para montar tu sistema de automatizaciones:\n\n1. Tareas Programadas: Cron jobs para backups, limpieza, reportes\n2. Monitorización: Health checks cada 5 min con alertas\n3. CI/CD: Deploy automático con GitHub Actions\n4. Backups: Diarios de BD y archivos, subidos a la nube\n5. Alertas: Slack/Telegram cuando algo falla\n6. Seguridad: Auditorías automáticas de dependencias\n\nTodo está explicado paso a paso en la sección de Automatizaciones!',
+      links: [{ label: 'Ir a Automatizaciones', path: '/automatizaciones' }],
+      chips: ['Que es un cron?', 'Como monitorizo mi web?', 'Backups automaticos'],
+    },
+    'monitorizo': {
+      text: 'Para monitorizar tus webs en producción:\n\n1. Crea un endpoint /health que verifique DB, caché y disco\n2. Usa UptimeRobot (gratis, 50 monitores) o Better Stack\n3. Configura alertas a Slack/Telegram si la web cae\n4. Añade Sentry para tracking de errores\n5. Lighthouse CI para auditar rendimiento automáticamente\n\nEn la sección de Automatizaciones tienes todo el código!',
+      links: [{ label: 'Ir a Automatizaciones', path: '/automatizaciones' }],
+      chips: ['Como configuro alertas?', 'Que es un health check?', 'Backups'],
     },
     'empiezo': {
       text: 'Para empezar con La Forja de Skills te recomiendo:\n\n1. Haz el Curso: 16 lecciones gamificadas que te ensenan todo\n2. La primera leccion explica que es un skill\n3. Ganaras XP, subiras de nivel y obtendras badges\n4. Cuando domines la teoria, pasa al Constructor para crear los tuyos\n\nCada leccion tiene teoria, ejemplo practico y un mini-reto!',
