@@ -155,6 +155,7 @@ export default function ChatAssistant() {
             transcript={speech.transcript}
             onStartListening={speech.startListening}
             onStopListening={speech.stopListening}
+            onStopSpeaking={speech.stopSpeaking}
             speechSupported={speech.supported}
           />
         )}

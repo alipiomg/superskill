@@ -20,6 +20,7 @@ export default function ChatPanel({
   transcript,
   onStartListening,
   onStopListening,
+  onStopSpeaking,
   speechSupported,
 }) {
   return (
@@ -55,7 +56,9 @@ export default function ChatPanel({
         transcript={transcript}
         onStartListening={onStartListening}
         onStopListening={onStopListening}
+        onStopSpeaking={onStopSpeaking}
         voiceMode={voiceMode}
+        onToggleVoiceMode={onToggleVoiceMode}
         speechSupported={speechSupported?.recognition}
       />
     </motion.div>
