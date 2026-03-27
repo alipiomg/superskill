@@ -47,11 +47,10 @@ export default function ChatAssistant() {
   const { progress, level } = useProgress();
   const location = useLocation();
 
-  // Speech hook — voice input sends message, voice output reads responses
+  // Speech hook — voice input triggers handleSend, voice output reads responses
   const speech = useSpeech({
     lang: 'es-ES',
     onResult: (text) => {
-      // Voice input recognized → send as message
       if (text.trim()) {
         handleSend(text.trim());
       }
@@ -70,9 +69,9 @@ export default function ChatAssistant() {
       initializedRef.current = true;
       const greeting = getGreeting(progress, level);
       addMessage(greeting);
-      // Speak greeting if voice is enabled
-      if (speech.speakEnabled) {
-        speech.speak(greeting.text);
+      // In voice mode, speak greeting and then auto-listen
+      if (speech.voiceMode) {
+        speech.speak(greeting.text, { autoListenAfter: true });
       }
     }
   }, [progress, level, addMessage, speech]);
@@ -103,9 +102,9 @@ export default function ChatAssistant() {
         };
         addMessage(assistantMsg);
 
-        // Auto-speak response if voice output is enabled
-        if (speech.speakEnabled) {
-          speech.speak(response.text);
+        // In voice mode: speak response, then auto-listen for next input
+        if (speech.voiceMode) {
+          speech.speak(response.text, { autoListenAfter: true });
         }
       } catch {
         addMessage({
@@ -149,8 +148,8 @@ export default function ChatAssistant() {
             onToggleMode={toggleMode}
             onChipClick={handleChipClick}
             // Speech props
-            speakEnabled={speech.speakEnabled}
-            onToggleSpeak={speech.toggleSpeak}
+            voiceMode={speech.voiceMode}
+            onToggleVoiceMode={speech.toggleVoiceMode}
             isSpeaking={speech.isSpeaking}
             isListening={speech.isListening}
             transcript={speech.transcript}

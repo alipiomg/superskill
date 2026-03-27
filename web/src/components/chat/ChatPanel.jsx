@@ -13,8 +13,8 @@ export default function ChatPanel({
   onToggleMode,
   onChipClick,
   // Speech props
-  speakEnabled,
-  onToggleSpeak,
+  voiceMode,
+  onToggleVoiceMode,
   isSpeaking,
   isListening,
   transcript,
@@ -40,10 +40,10 @@ export default function ChatPanel({
         onClose={onClose}
         mode={mode}
         onToggleMode={onToggleMode}
-        speakEnabled={speakEnabled}
-        onToggleSpeak={onToggleSpeak}
+        voiceMode={voiceMode}
+        onToggleVoiceMode={onToggleVoiceMode}
         isSpeaking={isSpeaking}
-        speechSynthesisSupported={speechSupported?.synthesis}
+        speechSupported={speechSupported?.recognition && speechSupported?.synthesis}
       />
       <ChatMessages messages={messages} onChipClick={onChipClick} isTyping={isTyping} />
       <ChatInput
@@ -51,9 +51,11 @@ export default function ChatPanel({
         chips={chips}
         disabled={isTyping}
         isListening={isListening}
+        isSpeaking={isSpeaking}
         transcript={transcript}
         onStartListening={onStartListening}
         onStopListening={onStopListening}
+        voiceMode={voiceMode}
         speechSupported={speechSupported?.recognition}
       />
     </motion.div>
