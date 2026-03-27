@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, GraduationCap, Code, Brain, Users, Globe, Wrench, Bot, Server, ChevronDown, ChevronRight, ExternalLink, Clock, Award, BookOpen, Filter, ArrowLeft, Sparkles, Layers, GitBranch, Cpu, Smartphone, Briefcase, Zap, Target } from 'lucide-react';
+import { Search, GraduationCap, Code, Brain, Users, Globe, Wrench, Bot, Server, ChevronDown, ChevronRight, ExternalLink, Clock, Award, BookOpen, Filter, ArrowLeft, Sparkles, Layers, GitBranch, Cpu, Terminal, Briefcase, Zap, Target } from 'lucide-react';
 
 // ─── Course Data ────────────────────────────────────────────────────────────
 const categories = [
