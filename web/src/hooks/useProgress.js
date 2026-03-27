@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { courseNodes } from '../data/courseData';
 
 const STORAGE_KEY = 'superskill-progress';
 
@@ -70,6 +71,6 @@ export function useProgress() {
     resetProgress,
     getLevel,
     level: getLevel(progress.currentXp),
-    completionPercent: Math.round((progress.completedNodes.length / 13) * 100)
+    completionPercent: Math.round((progress.completedNodes.length / (courseNodes?.length || 16)) * 100)
   };
 }
