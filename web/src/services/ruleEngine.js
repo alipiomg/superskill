@@ -39,22 +39,51 @@ function detectIntent(message) {
 
     for (const pattern of entry.patterns) {
       const normalizedPattern = normalizeText(pattern);
+      const patternWords = normalizedPattern.split(' ');
 
-      // Exact full match of pattern in message
+      // Exact full match of pattern in message (strongest signal)
       if (normalized.includes(normalizedPattern)) {
-        // Longer patterns get higher score (more specific)
-        const patternWordCount = normalizedPattern.split(' ').length;
-        score += patternWordCount * 3 + entry.priority;
+        const patternWordCount = patternWords.length;
+        score = Math.max(score, patternWordCount * 4 + entry.priority);
       }
-      // Single word match
-      else if (normalizedPattern.split(' ').length === 1 && words.includes(normalizedPattern)) {
-        score += 1 + entry.priority * 0.5;
+      // Word overlap scoring — how many pattern words appear in the message
+      else if (patternWords.length > 1) {
+        const matchingWords = patternWords.filter(pw => words.includes(pw));
+        const overlap = matchingWords.length / patternWords.length;
+        if (overlap >= 0.5) {
+          // At least half the pattern words match
+          score = Math.max(score, overlap * patternWords.length * 2 + entry.priority * 0.7);
+        }
+      }
+      // Single word pattern — exact word match
+      else if (patternWords.length === 1 && words.includes(normalizedPattern)) {
+        score = Math.max(score, 1 + entry.priority * 0.5);
       }
     }
 
     if (score > bestScore) {
       bestScore = score;
       bestIntent = entry.intent;
+    }
+  }
+
+  // Context-based fallback: if score is very low, try keyword heuristics
+  if (bestScore < 3) {
+    const keywordFallbacks = [
+      { keywords: ['skill', 'crear', 'hacer', 'generar', 'construir'], intent: 'HOW_TO' },
+      { keywords: ['skill', 'buscar', 'encontrar', 'hay'], intent: 'SEARCH_SKILL' },
+      { keywords: ['leccion', 'curso', 'aprender', 'estudiar'], intent: 'NEXT_LESSON' },
+      { keywords: ['progreso', 'xp', 'nivel', 'badge'], intent: 'PROGRESS' },
+      { keywords: ['que', 'es', 'significa', 'son'], intent: 'WHAT_IS' },
+      { keywords: ['constructor', 'marketplace', 'catalogo', 'plugins', 'agentes', 'configuracion'], intent: 'NAVIGATE' },
+    ];
+
+    for (const fb of keywordFallbacks) {
+      const matchCount = fb.keywords.filter(kw => words.includes(kw)).length;
+      if (matchCount >= 2 && matchCount > bestScore) {
+        bestScore = matchCount;
+        bestIntent = fb.intent;
+      }
     }
   }
 
@@ -357,6 +386,16 @@ function handleHowTo(message, userContext) {
 
   // Map common how-to queries to responses
   const howToResponses = {
+    'hacer una skill': {
+      text: 'Para crear un skill tienes 5 opciones en el Constructor:\n\n1. SuperConstructor: Describe lo que quieres en lenguaje natural y la IA genera el skill completo\n2. Crear Skill: Formulario guiado paso a paso\n3. Micro-Skill: Version ultra-ligera de menos de 100 lineas\n4. Mejorar: Toma un skill existente y lo optimiza\n5. Fusionar: Combina 2+ skills en uno superior\n\nTe recomiendo empezar con el SuperConstructor!',
+      links: [{ label: 'Ir al Constructor', path: '/constructor' }],
+      chips: ['SuperConstructor', 'Que es un micro-skill?', 'Como mejoro un skill?'],
+    },
+    'hacer un skill': {
+      text: 'Para crear un skill tienes 5 opciones en el Constructor:\n\n1. SuperConstructor: Describe lo que quieres en lenguaje natural y la IA genera el skill completo\n2. Crear Skill: Formulario guiado paso a paso\n3. Micro-Skill: Version ultra-ligera de menos de 100 lineas\n4. Mejorar: Toma un skill existente y lo optimiza\n5. Fusionar: Combina 2+ skills en uno superior\n\nTe recomiendo empezar con el SuperConstructor!',
+      links: [{ label: 'Ir al Constructor', path: '/constructor' }],
+      chips: ['SuperConstructor', 'Que es un micro-skill?', 'Como mejoro un skill?'],
+    },
     'creo un skill': {
       text: 'Para crear un skill tienes 5 opciones en el Constructor:\n\n1. SuperConstructor: Describe lo que quieres en lenguaje natural y la IA genera el skill completo\n2. Crear Skill: Formulario guiado paso a paso\n3. Micro-Skill: Version ultra-ligera de menos de 100 lineas\n4. Mejorar: Toma un skill existente y lo optimiza\n5. Fusionar: Combina 2+ skills en uno superior\n\nTe recomiendo empezar con el SuperConstructor!',
       links: [{ label: 'Ir al Constructor', path: '/constructor' }],
@@ -421,6 +460,26 @@ function handleHowTo(message, userContext) {
 
   if (bestMatch) {
     return bestMatch;
+  }
+
+  // Smart fallback: if message mentions "skill" with any action word, show skill creation
+  const actionWords = ['hacer', 'crear', 'generar', 'construir', 'armar', 'disenar', 'montar', 'fabricar', 'forjar', 'programar', 'desarrollar', 'escribir'];
+  const hasSkill = normalized.includes('skill');
+  const hasAction = actionWords.some(w => normalized.includes(w));
+
+  if (hasSkill && hasAction) {
+    return howToResponses['creo un skill'];
+  }
+
+  // If mentions plugin/agente with action
+  const hasPlugin = normalized.includes('plugin');
+  const hasAgente = normalized.includes('agente') || normalized.includes('artgent');
+
+  if (hasPlugin && hasAction) {
+    return howToResponses['creo un plugin'];
+  }
+  if (hasAgente && hasAction) {
+    return howToResponses['creo un agente'];
   }
 
   // Generic how-to response

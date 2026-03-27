@@ -5,31 +5,58 @@
 
 export const intentPatterns = [
   // GREETING - highest priority for quick responses
-  { intent: 'GREETING', patterns: ['hola', 'hey', 'buenas', 'buenos dias', 'buenos días', 'buenas tardes', 'buenas noches', 'que tal', 'qué tal', 'saludos', 'ey', 'hello', 'hi', 'ola', 'wena', 'ke tal'], priority: 10 },
+  { intent: 'GREETING', patterns: ['hola', 'hey', 'buenas', 'buenos dias', 'buenos días', 'buenas tardes', 'buenas noches', 'que tal', 'qué tal', 'saludos', 'ey', 'hello', 'hi', 'ola', 'wena', 'ke tal', 'que onda', 'como estas', 'cómo estás'], priority: 10 },
 
   // PROGRESS - user checking their advancement
-  { intent: 'PROGRESS', patterns: ['mi progreso', 'cuanto llevo', 'cuánto llevo', 'xp', 'nivel', 'level', 'experiencia', 'puntos', 'mis puntos', 'mi nivel', 'mi xp', 'como voy', 'cómo voy', 'mis badges', 'mis insignias', 'estadisticas', 'estadísticas', 'mi avance'], priority: 9 },
+  { intent: 'PROGRESS', patterns: ['mi progreso', 'cuanto llevo', 'cuánto llevo', 'xp', 'nivel', 'level', 'experiencia', 'puntos', 'mis puntos', 'mi nivel', 'mi xp', 'como voy', 'cómo voy', 'mis badges', 'mis insignias', 'estadisticas', 'estadísticas', 'mi avance', 'cuantas lecciones', 'cuántas lecciones', 'cuantas me faltan', 'que llevo', 'puntuacion', 'mi puntuacion'], priority: 9 },
 
   // NEXT_LESSON - what to do next
-  { intent: 'NEXT_LESSON', patterns: ['siguiente', 'next', 'que sigo', 'qué sigo', 'proxima leccion', 'próxima lección', 'que hago ahora', 'qué hago ahora', 'siguiente leccion', 'siguiente lección', 'continuar', 'que me falta', 'qué me falta', 'por donde voy', 'por dónde voy'], priority: 8 },
+  { intent: 'NEXT_LESSON', patterns: ['siguiente', 'next', 'que sigo', 'qué sigo', 'proxima leccion', 'próxima lección', 'que hago ahora', 'qué hago ahora', 'siguiente leccion', 'siguiente lección', 'continuar', 'que me falta', 'qué me falta', 'por donde voy', 'por dónde voy', 'que leccion toca', 'que toca ahora', 'que viene ahora'], priority: 8 },
+
+  // HOW_TO - procedural questions (higher priority — catch "hacer/crear skill" before NAVIGATE)
+  { intent: 'HOW_TO', patterns: [
+    'como creo', 'cómo creo', 'como hago', 'cómo hago', 'como puedo', 'cómo puedo',
+    'como se hace', 'cómo se hace', 'como se crea', 'cómo se crea',
+    'como instalo', 'cómo instalo', 'como mejoro', 'cómo mejoro',
+    'como fusiono', 'cómo fusiono', 'como catalogo', 'cómo catalogo',
+    'como configuro', 'cómo configuro', 'como uso', 'cómo uso',
+    'como empiezo', 'cómo empiezo', 'por donde empiezo', 'por dónde empiezo',
+    'pasos para', 'tutorial', 'quiero hacer', 'quiero crear',
+    'hacer una skill', 'hacer un skill', 'crear una skill', 'crear un skill',
+    'poder hacer', 'poder crear', 'puedo hacer', 'puedo crear',
+    'hacerme una skill', 'hacerme un skill', 'crearme una skill', 'crearme un skill',
+    'necesito una skill', 'necesito un skill', 'necesito crear',
+    'se puede hacer', 'se puede crear', 'quiero aprender',
+    'como funciona el constructor', 'como uso el constructor',
+    'hacer un plugin', 'crear un plugin', 'hacer un agente', 'crear un agente',
+    'como instalar', 'como crear', 'como hacer', 'como mejorar', 'como fusionar',
+  ], priority: 8 },
 
   // NAVIGATE - going to sections
-  { intent: 'NAVIGATE', patterns: ['donde', 'dónde', 'como llego a', 'cómo llego a', 'ir a', 'abrir', 'constructor', 'marketplace', 'catalogo', 'catálogo', 'plugins', 'agentes', 'artgents', 'configuracion', 'configuración', 'curso', 'guia', 'guía', 'ejemplo marca', 'inicio', 'home', 'llévame', 'llevame', 'navegar', 'ir al'], priority: 7 },
+  { intent: 'NAVIGATE', patterns: ['donde esta', 'dónde está', 'donde encuentro', 'como llego a', 'cómo llego a', 'ir a', 'abrir', 'llévame', 'llevame', 'navegar', 'ir al', 'mostrar', 'enséñame la seccion', 'muestrame', 'abre'], priority: 7 },
 
   // WHAT_IS - concept definitions
-  { intent: 'WHAT_IS', patterns: ['que es un skill', 'qué es un skill', 'que son triggers', 'qué son triggers', 'que es frontmatter', 'qué es frontmatter', 'que es un plugin', 'qué es un plugin', 'que es un agente', 'qué es un agente', 'que es sinapsis', 'qué es sinapsis', 'que es un micro-skill', 'qué es un micro-skill', 'que es fusion', 'qué es fusión', 'que es', 'qué es', 'que son', 'qué son', 'definicion de', 'definición de', 'que significa', 'qué significa', 'que es un artgent', 'que es un superagente', 'que es progressive-disclosure', 'que es el marketplace', 'que es el constructor', 'que es rubrica', 'que es la rubrica'], priority: 7 },
-
-  // HOW_TO - procedural questions
-  { intent: 'HOW_TO', patterns: ['como creo', 'cómo creo', 'como instalo', 'cómo instalo', 'como mejoro', 'cómo mejoro', 'como fusiono', 'cómo fusiono', 'como catalogo', 'cómo catalogo', 'como configuro', 'cómo configuro', 'como hago', 'cómo hago', 'como puedo', 'cómo puedo', 'pasos para', 'tutorial', 'como se hace', 'cómo se hace', 'como uso', 'cómo uso', 'como empiezo', 'cómo empiezo'], priority: 6 },
+  { intent: 'WHAT_IS', patterns: [
+    'que es un skill', 'qué es un skill', 'que es una skill', 'qué es una skill',
+    'que son triggers', 'qué son triggers', 'que es frontmatter', 'qué es frontmatter',
+    'que es un plugin', 'qué es un plugin', 'que es un agente', 'qué es un agente',
+    'que es sinapsis', 'qué es sinapsis', 'que es un micro-skill', 'qué es un micro-skill',
+    'que es fusion', 'qué es fusión', 'que es', 'qué es', 'que son', 'qué son',
+    'definicion de', 'definición de', 'que significa', 'qué significa',
+    'que es un artgent', 'que es un superagente',
+    'que es progressive-disclosure', 'que es el marketplace', 'que es el constructor',
+    'que es rubrica', 'que es la rubrica', 'que es la forja',
+    'a que te refieres con', 'que quiere decir',
+  ], priority: 7 },
 
   // LESSON_INFO - asking about specific lessons or concepts
-  { intent: 'LESSON_INFO', patterns: ['explicame', 'explícame', 'leccion sobre', 'lección sobre', 'leccion de', 'lección de', 'dime sobre', 'cuentame sobre', 'cuéntame sobre', 'informacion sobre', 'información sobre', 'tema de', 'detalle de', 'mas sobre', 'más sobre', 'profundiza', 'quiero saber de', 'enseñame', 'enséñame'], priority: 5 },
+  { intent: 'LESSON_INFO', patterns: ['explicame', 'explícame', 'leccion sobre', 'lección sobre', 'leccion de', 'lección de', 'dime sobre', 'cuentame sobre', 'cuéntame sobre', 'informacion sobre', 'información sobre', 'tema de', 'detalle de', 'mas sobre', 'más sobre', 'profundiza', 'quiero saber de', 'enseñame', 'enséñame', 'habla de', 'hablame de', 'que trata'], priority: 5 },
 
   // SEARCH_SKILL - searching the skills database
-  { intent: 'SEARCH_SKILL', patterns: ['buscar skill', 'hay skills de', 'skills para', 'encuentra', 'busca', 'skill de', 'skills de', 'skill para', 'tengo skills', 'existe un skill', 'hay algo de', 'hay algo para', 'recomienda skill', 'recomienda skills', 'buscar en marketplace'], priority: 5 },
+  { intent: 'SEARCH_SKILL', patterns: ['buscar skill', 'hay skills de', 'skills para', 'encuentra', 'busca skill', 'skill de', 'skills de', 'skill para', 'tengo skills', 'existe un skill', 'hay algo de', 'hay algo para', 'recomienda skill', 'recomienda skills', 'buscar en marketplace', 'quiero un skill de', 'skills sobre', 'tienes skills'], priority: 5 },
 
   // HELP - what can Forjito do
-  { intent: 'HELP', patterns: ['ayuda', 'help', 'que puedes hacer', 'qué puedes hacer', 'funciones', 'capacidades', 'opciones', 'menu', 'menú', 'comandos', 'que sabes', 'qué sabes', 'como funciona', 'cómo funciona', 'para que sirves', 'para qué sirves', 'que haces', 'qué haces'], priority: 4 },
+  { intent: 'HELP', patterns: ['ayuda', 'help', 'que puedes hacer', 'qué puedes hacer', 'funciones', 'capacidades', 'opciones', 'menu', 'menú', 'comandos', 'que sabes', 'qué sabes', 'para que sirves', 'para qué sirves', 'que haces', 'qué haces', 'que puedo hacer', 'qué puedo hacer', 'como me ayudas', 'que ofreces'], priority: 4 },
 
   // EASTER_EGG - fun interactions
   { intent: 'EASTER_EGG', patterns: ['forja un chiste', 'joke', 'chiste', 'stats', 'rpg', 'ficha rpg', 'mi ficha', 'personaje', 'character', 'dame un chiste', 'cuentame un chiste', 'cuéntame un chiste', 'humor', 'jaja', 'divertido', 'gracioso'], priority: 3 },
