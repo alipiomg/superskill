@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Hammer, BookOpen, Wrench, Library, Plug, GraduationCap, Settings, Menu, X, Shield, Store, Paintbrush, Compass } from 'lucide-react';
+import ChatAssistant from './chat/ChatAssistant';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -108,6 +109,7 @@ export default function Layout() {
       {/* Main Content */}
       <main className="flex-1 lg:ml-64 pt-16 lg:pt-0 min-h-screen">
         <Outlet />
+        <ChatAssistant />
       </main>
     </div>
   );
