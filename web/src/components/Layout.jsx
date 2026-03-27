@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { Hammer, BookOpen, Wrench, Library, Plug, GraduationCap, Settings, Menu, X, Shield, Store, Paintbrush, Compass, Timer } from 'lucide-react';
+import { Hammer, BookOpen, Wrench, Library, Plug, GraduationCap, Settings, Menu, X, Shield, Store, Paintbrush, Compass, Timer, Building2, Brain } from 'lucide-react';
 import ChatAssistant from './chat/ChatAssistant';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,6 +15,8 @@ const navItems = [
   { to: '/agentes', icon: Shield, label: 'ARTgents' },
   { to: '/ejemplo-marca', icon: Paintbrush, label: 'Ejemplo Marca' },
   { to: '/automatizaciones', icon: Timer, label: 'Automatizaciones' },
+  { to: '/curso-paperclip', icon: Building2, label: 'Curso Paperclip' },
+  { to: '/curso-claude', icon: Brain, label: 'Curso Claude' },
   { to: '/configuracion', icon: Settings, label: 'Configuración' },
 ];
 

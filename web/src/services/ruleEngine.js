@@ -284,6 +284,8 @@ function handleNavigate(message) {
     agentes: ['agentes', 'artgents', 'agente', 'superagentes', 'superagente', 'arena'],
     ejemploMarca: ['ejemplo marca', 'branding', 'marca personal', 'marca'],
     automatizaciones: ['automatizaciones', 'automatizar', 'autopilot', 'cron', 'programaciones', 'tareas programadas', 'monitorizar', 'monitorizacion', 'health check', 'deploys automaticos', 'ci cd'],
+    cursoPaperclip: ['curso paperclip', 'paperclip', 'curso de paperclip', 'empresa de agentes', 'empresa sin humanos', 'heartbeats', 'org chart', 'clipmart', 'orquestacion agentes'],
+    cursoClaude: ['curso claude', 'curso de claude', 'aprender claude', 'ecosistema claude', 'modelos claude', 'co-work', 'cowork', 'opus', 'sonnet', 'haiku', 'dispatch', 'channels', 'computer use'],
     configuracion: ['configuracion', 'config', 'settings', 'ajustes', 'hooks', 'repos recomendados', '.claude'],
   };
 

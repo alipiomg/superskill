@@ -33,7 +33,7 @@ export const intentPatterns = [
   ], priority: 8 },
 
   // NAVIGATE - going to sections
-  { intent: 'NAVIGATE', patterns: ['donde esta', 'dónde está', 'donde encuentro', 'como llego a', 'cómo llego a', 'ir a', 'abrir', 'llévame', 'llevame', 'navegar', 'ir al', 'mostrar', 'enséñame la seccion', 'muestrame', 'abre'], priority: 7 },
+  { intent: 'NAVIGATE', patterns: ['donde esta', 'dónde está', 'donde encuentro', 'como llego a', 'cómo llego a', 'ir a', 'abrir', 'llévame', 'llevame', 'navegar', 'ir al', 'mostrar', 'enséñame la seccion', 'muestrame', 'abre', 'curso claude', 'curso de claude', 'aprender claude'], priority: 7 },
 
   // WHAT_IS - concept definitions
   { intent: 'WHAT_IS', patterns: [
@@ -76,6 +76,8 @@ export const appSections = {
   agentes: { path: '/agentes', name: 'ARTgents', description: 'SuperAgentes con SuperHabilidades', icon: 'Shield' },
   ejemploMarca: { path: '/ejemplo-marca', name: 'Ejemplo Marca', description: 'Crea tu plugin de branding personal', icon: 'Paintbrush' },
   automatizaciones: { path: '/automatizaciones', name: 'Automatizaciones', description: 'Tareas programadas, monitorización, deploys, backups, alertas y mantenimiento', icon: 'Timer' },
+  cursoPaperclip: { path: '/curso-paperclip', name: 'Curso Paperclip', description: '10 lecciones sobre orquestacion de agentes de IA con Paperclip: arquitectura, instalacion, gestion y casos de uso', icon: 'Building2' },
+  cursoClaude: { path: '/curso-claude', name: 'Curso Claude', description: '16 lecciones sobre el ecosistema Claude: modelos, Co-work, Skills, Agents, Code, integraciones', icon: 'Brain' },
   configuracion: { path: '/configuracion', name: 'Configuracion', description: 'Configurar .claude, settings, hooks, repos', icon: 'Settings' },
 };
 
@@ -88,6 +90,8 @@ export const quickChips = {
   '/agentes': ['Que es un ARTgent?', 'Como creo un agente?', 'SuperAgentes'],
   '/plugins': ['Que es un plugin?', 'Como creo uno?', 'Marketplace'],
   '/automatizaciones': ['Que es un cron job?', 'Como monitorizo mi web?', 'Backups automaticos'],
+  '/curso-paperclip': ['Que es Paperclip?', 'Como instalo Paperclip?', 'Que son los heartbeats?'],
+  '/curso-claude': ['Que modelos de Claude hay?', 'Que es Co-work?', 'Como creo una Skill?'],
   '/configuracion': ['Como configuro .claude?', 'Repos recomendados', 'Hooks'],
 };
 
@@ -133,4 +137,17 @@ export const conceptDefinitions = {
   'deploy': 'Deploy es el proceso de publicar tu codigo en produccion. Con CI/CD se automatiza: push → tests → build → produccion.',
   'backup': 'Un backup es una copia de seguridad de tus datos. Regla 3-2-1: 3 copias, 2 medios diferentes, 1 fuera del sitio. Automatiza y prueba restaurar.',
   'monitoring': 'Monitorización es vigilar que tus webs esten online, rapidas y sin errores 24/7. Usa UptimeRobot, Grafana o scripts propios.',
+  'co-work': 'Claude Co-work es la herramienta central del ecosistema Claude. Permite tareas complejas, proyectos multi-sesion, acceso a archivos locales, sub-agentes en paralelo y automatizaciones con skills.',
+  'dispatch': 'Dispatch es un chat persistente y unificado entre todos tus dispositivos. Puede orquestar agentes de Co-work y Claude Code desde el movil.',
+  'channels': 'Claude Code Channels permite controlar sesiones de Claude Code desde Telegram o Discord en tu movil. Incluye permission relay y voice mode.',
+  'computer use': 'Computer Use permite a Claude tomar screenshots, controlar raton y teclado, y navegar apps de escritorio. Combinado con Dispatch y Scheduled Tasks es muy potente.',
+  'evals': 'Los Evals son tests automaticos que Claude ejecuta sobre tus skills. Lanza variaciones en paralelo, las puntua segun criterios definidos y te da un informe.',
+  'opus': 'Claude Opus 4.6 es el modelo mas potente: 1M tokens de contexto, 128K output, ideal para coding complejo y razonamiento profundo. ARC-AGI-2: 68.8%.',
+  'sonnet': 'Claude Sonnet 4.6 es el modelo por defecto de claude.ai. 1M tokens, equilibrio rendimiento/coste. SWE-bench ~80%. 30-50% mas rapido que Sonnet 4.5.',
+  'haiku': 'Claude Haiku 4.5 es el modelo mas rapido y barato. 200K tokens. Ideal para scheduled tasks, resumenes y tareas rapidas.',
+  'paperclip': 'Paperclip es un servidor Node.js + React open-source (MIT, 32.200+ estrellas) que orquesta un equipo de agentes de IA para gestionar un negocio. Si Claude Code es el empleado, Paperclip es la empresa.',
+  'heartbeat': 'Los heartbeats son intervalos programados (cada 4h, 8h, diariamente) en los que los agentes de Paperclip se despiertan, comprueban si hay trabajo pendiente, lo ejecutan y vuelven a dormir.',
+  'heartbeats': 'Los heartbeats son intervalos programados (cada 4h, 8h, diariamente) en los que los agentes de Paperclip se despiertan, comprueban si hay trabajo pendiente, lo ejecutan y vuelven a dormir.',
+  'clipmart': 'ClipMart sera el marketplace de Paperclip donde podras descargar empresas completas de IA pre-construidas con un click: Content Marketing Agency, Dev Agency, YouTube Factory, etc.',
+  'org chart': 'El Org Chart de Paperclip es un organigrama real donde cada rol (CEO, CMO, CTO, etc.) esta ocupado por un agente de IA con titulo, jefe y subordinados.',
 };
