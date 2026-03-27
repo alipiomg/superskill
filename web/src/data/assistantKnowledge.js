@@ -78,6 +78,7 @@ export const appSections = {
   automatizaciones: { path: '/automatizaciones', name: 'Automatizaciones', description: 'Tareas programadas, monitorización, deploys, backups, alertas y mantenimiento', icon: 'Timer' },
   cursoPaperclip: { path: '/curso-paperclip', name: 'Curso Paperclip', description: '10 lecciones sobre orquestacion de agentes de IA con Paperclip: arquitectura, instalacion, gestion y casos de uso', icon: 'Building2' },
   cursoClaude: { path: '/curso-claude', name: 'Curso Claude', description: '16 lecciones sobre el ecosistema Claude: modelos, Co-work, Skills, Agents, Code, integraciones', icon: 'Brain' },
+  cursosOficiales: { path: '/cursos-oficiales', name: 'Cursos Oficiales Anthropic', description: '20 cursos oficiales gratuitos de Anthropic con certificacion: API, prompting, MCP, Claude Code, agentes', icon: 'GraduationCap' },
   configuracion: { path: '/configuracion', name: 'Configuracion', description: 'Configurar .claude, settings, hooks, repos', icon: 'Settings' },
 };
 
@@ -91,7 +92,8 @@ export const quickChips = {
   '/plugins': ['Que es un plugin?', 'Como creo uno?', 'Marketplace'],
   '/automatizaciones': ['Que es un cron job?', 'Como monitorizo mi web?', 'Backups automaticos'],
   '/curso-paperclip': ['Que es Paperclip?', 'Como instalo Paperclip?', 'Que son los heartbeats?'],
-  '/curso-claude': ['Que modelos de Claude hay?', 'Que es Co-work?', 'Como creo una Skill?'],
+  '/curso-claude': ['Que modelos de Claude hay?', 'Que es Co-work?', 'Cursos oficiales Anthropic'],
+  '/cursos-oficiales': ['Donde esta Anthropic Academy?', 'Cursos gratuitos de Claude', 'Que rutas hay?'],
   '/configuracion': ['Como configuro .claude?', 'Repos recomendados', 'Hooks'],
 };
 
@@ -150,4 +152,6 @@ export const conceptDefinitions = {
   'heartbeats': 'Los heartbeats son intervalos programados (cada 4h, 8h, diariamente) en los que los agentes de Paperclip se despiertan, comprueban si hay trabajo pendiente, lo ejecutan y vuelven a dormir.',
   'clipmart': 'ClipMart sera el marketplace de Paperclip donde podras descargar empresas completas de IA pre-construidas con un click: Content Marketing Agency, Dev Agency, YouTube Factory, etc.',
   'org chart': 'El Org Chart de Paperclip es un organigrama real donde cada rol (CEO, CMO, CTO, etc.) esta ocupado por un agente de IA con titulo, jefe y subordinados.',
+  'anthropic academy': 'Anthropic Academy (anthropic.skilljar.com) ofrece 15 cursos oficiales gratuitos con certificacion sobre Claude, API, MCP, Claude Code, agentes y prompting. Ve a /cursos-oficiales para ver el directorio completo.',
+  'cursos oficiales': 'Anthropic ofrece 20 cursos gratuitos: 15 en Anthropic Academy (con certificado) y 5 en GitHub (Jupyter Notebooks). Desde fundamentos hasta agentes avanzados. Ve a /cursos-oficiales.',
 };

@@ -14,6 +14,7 @@ import Guia from './pages/Guia'
 import Automatizaciones from './pages/Automatizaciones'
 import CursoPaperclip from './pages/CursoPaperclip'
 import CursoClaude from './pages/CursoClaude'
+import CursosOficiales from './pages/CursosOficiales'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/automatizaciones" element={<Automatizaciones />} />
         <Route path="/curso-paperclip" element={<CursoPaperclip />} />
         <Route path="/curso-claude" element={<CursoClaude />} />
+        <Route path="/cursos-oficiales" element={<CursosOficiales />} />
         <Route path="/configuracion" element={<Configuracion />} />
         <Route path="*" element={<NotFound />} />
       </Route>

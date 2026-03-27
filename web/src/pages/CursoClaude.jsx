@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Brain, Cpu, Maximize2, Briefcase, FolderOpen, Zap, TestTube, GitBranch, Bot, Smartphone, Send, Monitor, Terminal, LayoutGrid, TrendingUp, MessageSquare, ChevronDown, ChevronRight, Copy, CheckCircle, Lightbulb, Target, Star, BookOpen, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Brain, Cpu, Maximize2, Briefcase, FolderOpen, Zap, TestTube, GitBranch, Bot, Smartphone, Send, Monitor, Terminal, LayoutGrid, TrendingUp, MessageSquare, ChevronDown, ChevronRight, Copy, CheckCircle, Lightbulb, Target, Star, BookOpen, ArrowRight, GraduationCap, Award, ExternalLink, Sparkles } from 'lucide-react';
 
 // ─── Code Block with copy ───────────────────────────────────────────────────
 function CodeBlock({ code, lang = 'text' }) {
@@ -807,6 +808,35 @@ export default function CursoClaude() {
           </div>
         ))}
       </div>
+
+      {/* Official Courses Banner */}
+      <Link
+        to="/cursos-oficiales"
+        className="group block mb-8 p-6 rounded-2xl border border-blue-500/20 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-forge-500/5 hover:from-blue-500/10 hover:via-purple-500/10 hover:to-forge-500/10 transition-all hover:scale-[1.01] hover:border-blue-500/40 relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
+        <div className="relative flex items-center gap-5">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-forge-500 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-shadow shrink-0">
+            <GraduationCap className="w-8 h-8 text-white" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="text-white font-bold text-lg">Curso Oficial de Anthropic</h3>
+              <span className="px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-semibold uppercase tracking-wider">Gratis</span>
+            </div>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              20 cursos oficiales de Anthropic con certificacion gratuita. API, prompting, MCP, Claude Code, agentes, skills y mas.
+            </p>
+            <div className="flex items-center gap-4 mt-2 text-xs text-zinc-500">
+              <span className="flex items-center gap-1"><Award className="w-3.5 h-3.5 text-gold-400" /> Con certificado</span>
+              <span className="flex items-center gap-1"><BookOpen className="w-3.5 h-3.5" /> 20 cursos</span>
+              <span className="flex items-center gap-1"><Sparkles className="w-3.5 h-3.5" /> Self-paced</span>
+            </div>
+          </div>
+          <ArrowRight className="w-6 h-6 text-zinc-600 group-hover:text-blue-400 group-hover:translate-x-1 transition-all shrink-0" />
+        </div>
+      </Link>
 
       {/* Expand all button */}
       <div className="flex justify-end mb-4">

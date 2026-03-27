@@ -286,6 +286,7 @@ function handleNavigate(message) {
     automatizaciones: ['automatizaciones', 'automatizar', 'autopilot', 'cron', 'programaciones', 'tareas programadas', 'monitorizar', 'monitorizacion', 'health check', 'deploys automaticos', 'ci cd'],
     cursoPaperclip: ['curso paperclip', 'paperclip', 'curso de paperclip', 'empresa de agentes', 'empresa sin humanos', 'heartbeats', 'org chart', 'clipmart', 'orquestacion agentes'],
     cursoClaude: ['curso claude', 'curso de claude', 'aprender claude', 'ecosistema claude', 'modelos claude', 'co-work', 'cowork', 'opus', 'sonnet', 'haiku', 'dispatch', 'channels', 'computer use'],
+    cursosOficiales: ['cursos oficiales', 'anthropic academy', 'curso oficial', 'cursos anthropic', 'cursos gratis claude', 'cursos gratuitos', 'certificacion claude', 'certificado claude', 'skilljar'],
     configuracion: ['configuracion', 'config', 'settings', 'ajustes', 'hooks', 'repos recomendados', '.claude'],
   };
 
