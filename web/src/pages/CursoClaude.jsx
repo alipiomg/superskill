@@ -5,10 +5,12 @@ import { Brain, Cpu, Maximize2, Briefcase, FolderOpen, Zap, TestTube, GitBranch,
 // ─── Code Block with copy ───────────────────────────────────────────────────
 function CodeBlock({ code, lang = 'text' }) {
   const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard unavailable */ }
   };
   return (
     <div className="relative group mt-3">

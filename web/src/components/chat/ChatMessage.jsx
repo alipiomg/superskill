@@ -31,11 +31,17 @@ function renderMarkdown(text) {
     if (match[2]) {
       parts.push(<strong key={key++} className="font-semibold">{match[2]}</strong>);
     } else if (match[3] && match[4]) {
-      parts.push(
-        <Link key={key++} to={match[4]} className="text-forge-400 hover:text-forge-300 underline underline-offset-2">
-          {match[3]}
-        </Link>
-      );
+      const url = match[4];
+      const isSafe = url.startsWith('/') || url.startsWith('https://') || url.startsWith('http://');
+      if (isSafe) {
+        parts.push(
+          <Link key={key++} to={url} className="text-forge-400 hover:text-forge-300 underline underline-offset-2">
+            {match[3]}
+          </Link>
+        );
+      } else {
+        parts.push(<span key={key++} className="text-zinc-500">{match[3]}</span>);
+      }
     }
     lastIndex = match.index + match[0].length;
   }

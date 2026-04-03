@@ -144,10 +144,12 @@ const item = {
 
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch { /* clipboard unavailable */ }
   };
   return (
     <button onClick={handleCopy} className="p-1.5 rounded-lg text-zinc-500 hover:text-forge-400 hover:bg-zinc-800 transition-all" title="Copiar">

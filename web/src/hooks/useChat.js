@@ -1,7 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 
 const STORAGE_KEY = 'superskill-chat';
 const MAX_MESSAGES = 100;
+const DEBOUNCE_MS = 1000;
 
 export function useChat() {
   const [messages, setMessages] = useState(() => {
@@ -15,13 +16,16 @@ export function useChat() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const debounceRef = useRef(null);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_MESSAGES)));
-    } catch {
-      // localStorage full or unavailable - silently ignore
-    }
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_MESSAGES)));
+      } catch { /* localStorage full or unavailable */ }
+    }, DEBOUNCE_MS);
+    return () => clearTimeout(debounceRef.current);
   }, [messages]);
 
   const addMessage = useCallback((role, text, extra = {}) => {

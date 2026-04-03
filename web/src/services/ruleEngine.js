@@ -8,8 +8,10 @@ import { findLessonByTopic, getLessonsUntil } from './contextBuilder';
 // =============================================================================
 
 export function processMessage(message, userContext, currentPath) {
-  const intent = detectIntent(message);
-  const response = generateResponse(intent, message, userContext, currentPath);
+  if (!message || typeof message !== 'string') return null;
+  const safeMessage = message.slice(0, 2000);
+  const intent = detectIntent(safeMessage);
+  const response = generateResponse(intent, safeMessage, userContext, currentPath);
   return response;
 }
 

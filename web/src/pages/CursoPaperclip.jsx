@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Building2, Layers, Download, Settings2, LayoutDashboard, Briefcase, Lightbulb, GitCompare, Target, Rocket, ChevronDown, ChevronRight, Copy, CheckCircle, Star, ArrowRight, BookOpen, Users, DollarSign, Clock, Shield } from 'lucide-react';
+import { Building2, Layers, Download, Settings2, LayoutDashboard, Briefcase, Lightbulb, GitCompare, Target, Rocket, ChevronDown, ChevronRight, Copy, CheckCircle, Star, ArrowRight, BookOpen, Users, DollarSign, Clock, Shield, Play, ExternalLink } from 'lucide-react';
 
 // ─── Code Block with copy ───────────────────────────────────────────────────
 function CodeBlock({ code }) {
   const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard unavailable */ }
   };
   return (
     <div className="relative group mt-3">
@@ -616,6 +618,159 @@ Cuando termines un bloque, informame antes de empezar el siguiente."`} />
   },
 ];
 
+// ─── Video Tutorials ────────────────────────────────────────────────────────
+const videoCategories = [
+  { id: 'all', label: 'Todos' },
+  { id: 'paperclip', label: 'Paperclip' },
+  { id: 'claude-code', label: 'Claude Code' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'cowork', label: 'Co-work & Dispatch' },
+];
+
+const videoTutorials = [
+  // ── Paperclip ──
+  {
+    id: 'C3-4llQYT8o',
+    title: 'Paperclip: Orquesta agentes de IA como una empresa',
+    channel: 'Tutorial Completo',
+    duration: null,
+    category: 'paperclip',
+    tags: ['introduccion', 'setup', 'agentes'],
+  },
+  {
+    id: 'Rgb-Kx-kkaA',
+    title: 'Claude Code, Paperclip y el auge de las empresas de agentes de IA',
+    channel: 'Chase AI',
+    duration: '8:51',
+    category: 'paperclip',
+    tags: ['paperclip', 'agentes', 'vision-general'],
+  },
+  {
+    id: 'iNxNkvZfNHM',
+    title: 'PaperClip + OpenClaw + OpenCode: Control de mision de inteligencia de enjambre',
+    channel: 'Devs Kingdom',
+    duration: '9:08',
+    category: 'paperclip',
+    tags: ['paperclip', 'openclaw', 'multi-agente'],
+  },
+  // ── Claude Code ──
+  {
+    id: 'A6oW7SnNq2g',
+    title: 'Tutorial de Claude Code',
+    channel: 'Platzi',
+    duration: '32:41',
+    category: 'claude-code',
+    tags: ['tutorial', 'español', 'principiante'],
+  },
+  {
+    id: '2aN_-m1uU4k',
+    title: 'Curso IA para Programadores en 2026 (Conceptos, Herramientas, Claude Code)',
+    channel: 'midudev',
+    duration: '1:39:57',
+    category: 'claude-code',
+    tags: ['curso', 'español', 'programadores'],
+  },
+  {
+    id: '73eFWU-edO4',
+    title: 'CLAUDE CODE 2026: Curso Completo en Español',
+    channel: 'Benjamin Cordero',
+    duration: '3:24:50',
+    category: 'claude-code',
+    tags: ['curso-completo', 'español', '2026'],
+  },
+  {
+    id: 'qctLhAeIIrA',
+    title: 'Claude Code Curso Completo GRATIS Para Principiantes 2026',
+    channel: 'Juan Pe Navarro',
+    duration: '1:32:24',
+    category: 'claude-code',
+    tags: ['curso', 'español', 'principiante'],
+  },
+  {
+    id: 'xVxwXxDid-4',
+    title: 'Domina el 90% de Claude Code en 37 Minutos',
+    channel: 'Daniel Carreon',
+    duration: '37:35',
+    category: 'claude-code',
+    tags: ['rapido', 'español', 'intermedio'],
+  },
+  // ── Skills ──
+  {
+    id: 'w2pXEmN6UiQ',
+    title: '7 Skills de Claude Code BRUTALES Para Automatizar Todo (Paso a Paso)',
+    channel: 'Juan Pe Navarro',
+    duration: '26:06',
+    category: 'skills',
+    tags: ['skills', 'español', 'automatizacion'],
+  },
+  {
+    id: 'UxfeF4bSBYI',
+    title: 'Claude Code Skills Just Got a MASSIVE Upgrade',
+    channel: 'Chase AI',
+    duration: '12:19',
+    category: 'skills',
+    tags: ['skills', 'novedades', 'ingles'],
+  },
+  {
+    id: 'a3uMv1S-1tM',
+    title: 'Claude Skills Explained: Beginner to Advanced Tutorial',
+    channel: 'Ali H. Salem',
+    duration: '30:07',
+    category: 'skills',
+    tags: ['skills', 'tutorial-completo', 'ingles'],
+  },
+  // ── Co-work & Dispatch ──
+  {
+    id: '5tTI5XMIa8s',
+    title: 'Claude Cowork Curso Completo (Automatiza Todo)',
+    channel: 'Juan Pe Navarro',
+    duration: '23:27',
+    category: 'cowork',
+    tags: ['cowork', 'español', 'curso-completo'],
+  },
+  {
+    id: 'FfjEgKSfUnU',
+    title: 'Claude Cowork Lanza el NUEVO Claude Dispatch (Claude Desde tu Movil)',
+    channel: 'Juan Pe Navarro',
+    duration: '15:29',
+    category: 'cowork',
+    tags: ['dispatch', 'español', 'novedad'],
+  },
+  {
+    id: 'RHnnw2_ZwOY',
+    title: 'Plugins de Claude Co-work: La Funcion que NADIE Te Cuenta y Automatiza TODO',
+    channel: 'Claridad Artificial',
+    duration: '24:55',
+    category: 'cowork',
+    tags: ['plugins', 'español', 'avanzado'],
+  },
+  {
+    id: 'A6RbawFHC80',
+    title: 'Crea equipos de agentes en Claude Cowork en 17 minutos',
+    channel: 'Ben AI',
+    duration: '17:38',
+    category: 'cowork',
+    tags: ['agentes', 'español', 'equipos'],
+  },
+  {
+    id: 'loCbuKhTN6U',
+    title: 'Como usar Claude Cowork mejor que el 99% (guia completa)',
+    channel: 'Josue Estevez | CEO Geniify',
+    duration: '23:56',
+    category: 'cowork',
+    tags: ['cowork', 'español', 'avanzado'],
+  },
+  // Para añadir más videos, copia este bloque:
+  // {
+  //   id: 'VIDEO_ID_DE_YOUTUBE',
+  //   title: 'Titulo del video',
+  //   channel: 'Nombre del canal',
+  //   duration: '15:30',
+  //   category: 'paperclip',  // paperclip | claude-code | skills | cowork
+  //   tags: ['tag1', 'tag2'],
+  // },
+];
+
 // ─── Color map ──────────────────────────────────────────────────────────────
 const colorMap = {
   forge: { bg: 'bg-forge-500/10', border: 'border-forge-500/30', text: 'text-forge-400', iconBg: 'bg-forge-500/20' },
@@ -633,6 +788,7 @@ const colorMap = {
 // ─── Main Page ──────────────────────────────────────────────────────────────
 export default function CursoPaperclip() {
   const [openSections, setOpenSections] = useState(new Set());
+  const [videoFilter, setVideoFilter] = useState('all');
 
   const toggle = (id) => {
     setOpenSections(prev => {
@@ -730,6 +886,84 @@ export default function CursoPaperclip() {
           );
         })}
       </div>
+
+      {/* Video Tutoriales */}
+      {videoTutorials.length > 0 && (
+        <section className="mt-12">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
+              <Play className="w-5 h-5 text-red-400" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">Video Tutoriales</h2>
+              <p className="text-sm text-zinc-500">{videoTutorials.length} videos sobre Paperclip, Claude Code, Skills y Co-work</p>
+            </div>
+          </div>
+
+          {/* Category filter tabs */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {videoCategories.map(cat => {
+              const count = cat.id === 'all' ? videoTutorials.length : videoTutorials.filter(v => v.category === cat.id).length;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setVideoFilter(cat.id)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    videoFilter === cat.id
+                      ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                      : 'bg-zinc-800/50 text-zinc-500 border border-zinc-800 hover:text-zinc-300'
+                  }`}
+                >
+                  {cat.label} <span className="text-xs opacity-60">({count})</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="space-y-4">
+            {videoTutorials.filter(v => videoFilter === 'all' || v.category === videoFilter).map((video) => (
+              <div key={video.id} className="rounded-2xl border border-zinc-800 hover:border-red-500/30 bg-zinc-900/50 overflow-hidden transition-all">
+                <div className="aspect-video w-full">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.id}`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-white font-semibold">{video.title}</h3>
+                      <p className="text-sm text-zinc-500 mt-1">
+                        {video.channel}
+                        {video.duration && <span> · {video.duration}</span>}
+                      </p>
+                    </div>
+                    <a
+                      href={`https://www.youtube.com/watch?v=${video.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all"
+                      title="Ver en YouTube"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+                  {video.tags && (
+                    <div className="flex flex-wrap gap-1.5 mt-3">
+                      {video.tags.map(tag => (
+                        <span key={tag} className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-400 text-xs">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Footer */}
       <div className="mt-12 p-6 bg-zinc-900/50 rounded-2xl border border-zinc-800 text-center">

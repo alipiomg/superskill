@@ -147,10 +147,12 @@ export default function Marketplace() {
   const [copiedStates, setCopiedStates] = useState({});
   const [activeFilter, setActiveFilter] = useState('Todos');
 
-  const copyToClipboard = (text, id) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => setCopiedStates(prev => ({ ...prev, [id]: false })), 2000);
+  const copyToClipboard = async (text, id) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedStates(prev => ({ ...prev, [id]: true }));
+      setTimeout(() => setCopiedStates(prev => ({ ...prev, [id]: false })), 2000);
+    } catch { /* clipboard unavailable */ }
   };
 
   const filteredRepos = repos.filter(repo => {
